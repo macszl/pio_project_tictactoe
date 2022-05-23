@@ -13,8 +13,7 @@ public class Square extends StackPane {
 
     Grid belongsTo;
 
-    Square()
-    {
+    Square() {
         placed.setFitWidth(GameInfo.placedSize);
         placed.setFitHeight(GameInfo.placedSize);
         this.getChildren().add(placed);
