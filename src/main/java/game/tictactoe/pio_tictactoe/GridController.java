@@ -46,7 +46,7 @@ public class GridController implements Initializable {
                 temp.resize(280,280);
                 temp.setLayoutX(280*i);
                 temp.setLayoutY(280*j);
-                GameInfo.currentPlayer = 1;
+                GameInfo.currentPlayer = PlayerType.O;
             }
         }
 

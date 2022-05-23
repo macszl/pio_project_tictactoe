@@ -18,30 +18,42 @@ public class Square extends StackPane {
     Grid belongsTo;
 
     Square() {
-        placed.setFitWidth(GameInfo.placedSize);
-        placed.setFitHeight(GameInfo.placedSize);
-        this.getChildren().add(placed);
         this.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                if(empty)
-                {
-                        setCircle();
+                if(empty) {
+                    if(GameInfo.currentPlayer == PlayerType.O){
+                        setO();
+                        empty = false;
+                        GameInfo.currentPlayer = PlayerType.X;
+                    }
+                    else{
+                        setX();
+                        empty = false;
+                        GameInfo.currentPlayer = PlayerType.O;
+                    }
                 }
-
             }
-
         });
     }
 
-
-    public void setCircle()
-    {
-        placed.setImage(Images.circle);
+    public void setO(){
+        circle.setCenterX(GameInfo.placedSize/2);
+        circle.setCenterY(GameInfo.placedSize/2);
+        circle.setRadius(GameInfo.placedSize/2);
+        this.getChildren().add(circle);
     }
-    public void setX()
-    {
-        placed.setImage(Images.X);
+    public void setX(){
+        line1.setStartX(GameInfo.placedSize-1);
+        line1.setStartY(GameInfo.placedSize-1);
+        line1.setEndX(GameInfo.placedSize+1);
+        line1.setEndY(GameInfo.placedSize+1);
+        line2.setStartX(GameInfo.placedSize+1);
+        line2.setStartY(GameInfo.placedSize+1);
+        line2.setEndX(GameInfo.placedSize-1);
+        line2.setEndY(GameInfo.placedSize-1);
+        this.getChildren().add(line1);
+        this.getChildren().add(line2);
     }
 
 }

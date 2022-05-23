@@ -5,12 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="64111c81-8b6d-4780-9c93-a7b63714fc0c" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/game/tictactoe/pio_tictactoe/PlayerType.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/game/tictactoe/pio_tictactoe/GameInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/game/tictactoe/pio_tictactoe/GameInfo.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/game/tictactoe/pio_tictactoe/GridController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/game/tictactoe/pio_tictactoe/GridController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/game/tictactoe/pio_tictactoe/HelloController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/game/tictactoe/pio_tictactoe/Images.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/game/tictactoe/pio_tictactoe/Images.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/game/tictactoe/pio_tictactoe/Square.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/game/tictactoe/pio_tictactoe/Square.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/game/tictactoe/pio_tictactoe/hello-view.fxml" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -21,6 +21,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Class" />
+        <option value="Enum" />
       </list>
     </option>
   </component>
@@ -77,7 +78,8 @@
       <updated>1653293956905</updated>
       <workItem from="1653293958998" duration="4000" />
       <workItem from="1653294185168" duration="4903000" />
-      <workItem from="1653304848510" duration="460000" />
+      <workItem from="1653304848510" duration="820000" />
+      <workItem from="1653306956892" duration="817000" />
     </task>
     <servers />
   </component>
