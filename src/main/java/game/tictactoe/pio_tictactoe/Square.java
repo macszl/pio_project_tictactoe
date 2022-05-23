@@ -4,10 +4,14 @@ import javafx.event.EventHandler;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
+import javafx.scene.shape.Circle;
+import javafx.scene.shape.Line;
 
 public class Square extends StackPane {
 
-    ImageView placed = new ImageView();
+    Circle circle = new Circle();
+    Line line1 = new Line();
+    Line line2 = new Line();
     boolean empty=true;
     int poz;
 
