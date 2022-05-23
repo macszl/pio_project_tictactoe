@@ -1,2 +1,7 @@
-package game.tictactoe.pio_tictactoe;public class GameInfo {
+package game.tictactoe.pio_tictactoe;
+
+public class GameInfo {
+
+    static int placedSize=50;
+
 }
