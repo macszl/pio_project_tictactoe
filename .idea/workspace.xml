@@ -5,12 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="64111c81-8b6d-4780-9c93-a7b63714fc0c" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/game/tictactoe/pio_tictactoe/PlayerType.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/game/tictactoe/pio_tictactoe/Cross.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/X.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/circle.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/square.png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/game/tictactoe/pio_tictactoe/GameInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/game/tictactoe/pio_tictactoe/GameInfo.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/game/tictactoe/pio_tictactoe/GridController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/game/tictactoe/pio_tictactoe/GridController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/game/tictactoe/pio_tictactoe/Images.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/game/tictactoe/pio_tictactoe/Images.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/game/tictactoe/pio_tictactoe/HelloApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/game/tictactoe/pio_tictactoe/HelloApplication.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/game/tictactoe/pio_tictactoe/Square.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/game/tictactoe/pio_tictactoe/Square.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/game/tictactoe/pio_tictactoe/mainGrid.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/game/tictactoe/pio_tictactoe/mainGrid.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -20,8 +24,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="Enum" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -29,7 +33,7 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="jar://$PROJECT_DIR$/../.m2/repository/org/openjfx/javafx-graphics/17.0.1/javafx-graphics-17.0.1-win.jar!/javafx/scene/shape/Line.class" root0="SKIP_INSPECTION" />
+    <setting file="jar://$MAVEN_REPOSITORY$/org/openjfx/javafx-graphics/17.0.1/javafx-graphics-17.0.1-win.jar!/javafx/scene/shape/Line.class" root0="SKIP_INSPECTION" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -46,7 +50,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
+    <property name="settings.editor.selected.configurable" value="reference.settings.project.maven.repository.indices" />
   </component>
   <component name="RunManager">
     <configuration name="HelloApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">

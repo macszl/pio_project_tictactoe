@@ -2,12 +2,14 @@ package game.tictactoe.pio_tictactoe;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
+import javafx.scene.ImageCursor;
+import javafx.scene.SnapshotParameters;
+import javafx.scene.image.WritableImage;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.GridPane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
+import javafx.scene.shape.Rectangle;
 
-import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.Vector;
@@ -18,6 +20,9 @@ public class GridController implements Initializable {
     private AnchorPane BoardGrid;
 
     private Vector<Grid> Grids= new Vector<>();
+
+    static Circle circle = new Circle(GameInfo.placedSize/2,GameInfo.placedSize/2,GameInfo.placedSize/2,Color.TRANSPARENT);
+    static Cross cross = new Cross();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -30,14 +35,17 @@ public class GridController implements Initializable {
                 {
                     for(int l=0;l<3;l++)
                     {
+                        Rectangle r = new Rectangle(90,90);
+                        r.setFill(Color.TRANSPARENT);
+                        r.setStroke(Color.BLACK);
+                        r.setStrokeWidth(5);
                         Square temp2 = new Square();
-                        ImageView squareImage = new ImageView(Images.square);
-                        temp2.getChildren().add(squareImage);
+                        temp2.getChildren().add(r);
                         temp2.resize(90,90);
                         temp.getChildren().add(temp2);
                         temp.squares.add(temp2);
-                        temp2.setLayoutX(90*k);
-                        temp2.setLayoutY(l*90);
+                        temp2.setLayoutX(2+90*k);
+                        temp2.setLayoutY(l*90+1);
                         temp2.belongsTo=temp;
                     }
                 }
@@ -49,8 +57,23 @@ public class GridController implements Initializable {
                 GameInfo.currentPlayer = PlayerType.O;
             }
         }
+    }
 
+    public void changeCursor(){
 
+        //TODO: figure out how to make it callable from Square or make the cursor change in a different way
 
+        SnapshotParameters snapShotparams = new SnapshotParameters();
+        snapShotparams.setFill(Color.TRANSPARENT);
+        if(GameInfo.currentPlayer == PlayerType.O){
+            circle.setStroke(Color.BLUE);
+            circle.setStrokeWidth(7);
+            WritableImage image = circle.snapshot(snapShotparams, null);
+            BoardGrid.setCursor(new ImageCursor(image, GameInfo.placedSize, GameInfo.placedSize));
+        }
+        else{
+            WritableImage image = cross.snapshot(snapShotparams, null);
+            BoardGrid.setCursor(new ImageCursor(image, GameInfo.placedSize, GameInfo.placedSize));
+        }
     }
 }
