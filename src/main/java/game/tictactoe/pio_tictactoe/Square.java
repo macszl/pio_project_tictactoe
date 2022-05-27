@@ -16,7 +16,7 @@ public class Square extends StackPane{
     Cross cross = new Cross();
     boolean empty=true;
     private AnchorPane BoardGrid;
-    Grid belongsTo;
+    Grid parent;
     int x, y;
 
     Square(AnchorPane BoardGrid) {
@@ -24,20 +24,7 @@ public class Square extends StackPane{
         this.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                if(empty && isAllowedToPlace()) {
-                    if(GameInfo.currentPlayer == PlayerType.Circle){
-                        setCircle();
-                        empty = false;
-                        GameInfo.currentPlayer = PlayerType.Cross;
-                        changeCursor();
-                    }
-                    else{
-                        setCross();
-                        empty = false;
-                        GameInfo.currentPlayer = PlayerType.Circle;
-                        changeCursor();
-                    }
-                }
+                onMouseClickEvent();
             }
         });
     }
@@ -69,7 +56,7 @@ public class Square extends StackPane{
     public boolean isAllowedToPlace()
     {
         if( GameInfo.getCurrentSector() == GameInfo.SECTOR_UNRESTRICTED ||
-            belongsTo.y * 3 + belongsTo.x == GameInfo.getCurrentSector())
+            parent.y * 3 + parent.x == GameInfo.getCurrentSector())
         {
             GameInfo.setCurrentSector(y * 3 + x);
             return true;
@@ -79,5 +66,22 @@ public class Square extends StackPane{
         }
     }
 
-
+    public void onMouseClickEvent() {
+        if(empty && isAllowedToPlace()) {
+            if(GameInfo.currentPlayer == PlayerType.Circle){
+                setCircle();
+                empty = false;
+                GameInfo.currentPlayer = PlayerType.Cross;
+                if(this.parent.parent.cursorMode == Board.CursorMode.SHAPE_CURSOR )
+                    changeCursor();
+            }
+            else{
+                setCross();
+                empty = false;
+                GameInfo.currentPlayer = PlayerType.Circle;
+                if(this.parent.parent.cursorMode == Board.CursorMode.SHAPE_CURSOR )
+                    changeCursor();
+            }
+        }
+    }
 }
