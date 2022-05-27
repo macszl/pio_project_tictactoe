@@ -22,7 +22,6 @@ public class GridController implements Initializable {
     private Vector<Grid> Grids= new Vector<>();
 
     static Circle circle = new Circle(GameInfo.placedSize/2,GameInfo.placedSize/2,GameInfo.placedSize/2,Color.TRANSPARENT);
-    static Cross cross = new Cross();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -39,7 +38,7 @@ public class GridController implements Initializable {
                         r.setFill(Color.TRANSPARENT);
                         r.setStroke(Color.BLACK);
                         r.setStrokeWidth(5);
-                        Square temp2 = new Square();
+                        Square temp2 = new Square(BoardGrid);
                         temp2.getChildren().add(r);
                         temp2.resize(90,90);
                         temp.getChildren().add(temp2);
@@ -55,25 +54,15 @@ public class GridController implements Initializable {
                 temp.setLayoutX(280*i);
                 temp.setLayoutY(280*j);
                 GameInfo.currentPlayer = PlayerType.O;
+                SnapshotParameters snapShotparams = new SnapshotParameters();
+                snapShotparams.setFill(Color.TRANSPARENT);
+                circle.setStroke(Color.BLUE);
+                circle.setStrokeWidth(7);
+                WritableImage image = circle.snapshot(snapShotparams, null);
+                BoardGrid.setCursor(new ImageCursor(image, GameInfo.placedSize, GameInfo.placedSize));
             }
         }
     }
 
-    public void changeCursor(){
 
-        //TODO: figure out how to make it callable from Square or make the cursor change in a different way
-
-        SnapshotParameters snapShotparams = new SnapshotParameters();
-        snapShotparams.setFill(Color.TRANSPARENT);
-        if(GameInfo.currentPlayer == PlayerType.O){
-            circle.setStroke(Color.BLUE);
-            circle.setStrokeWidth(7);
-            WritableImage image = circle.snapshot(snapShotparams, null);
-            BoardGrid.setCursor(new ImageCursor(image, GameInfo.placedSize, GameInfo.placedSize));
-        }
-        else{
-            WritableImage image = cross.snapshot(snapShotparams, null);
-            BoardGrid.setCursor(new ImageCursor(image, GameInfo.placedSize, GameInfo.placedSize));
-        }
-    }
 }
