@@ -30,6 +30,8 @@ public class GridController implements Initializable {
             for(int j=0;j<3;j++)
             {
                 Grid temp=new Grid();
+                temp.x = j;
+                temp.y = i;
                 for(int k=0;k<3;k++)
                 {
                     for(int l=0;l<3;l++)
@@ -39,6 +41,8 @@ public class GridController implements Initializable {
                         r.setStroke(Color.BLACK);
                         r.setStrokeWidth(5);
                         Square temp2 = new Square(BoardGrid);
+                        temp2.y = k;
+                        temp2.x = l;
                         temp2.getChildren().add(r);
                         temp2.resize(90,90);
                         temp.getChildren().add(temp2);
@@ -53,7 +57,7 @@ public class GridController implements Initializable {
                 temp.resize(280,280);
                 temp.setLayoutX(280*i);
                 temp.setLayoutY(280*j);
-                GameInfo.currentPlayer = PlayerType.O;
+                GameInfo.currentPlayer = PlayerType.Circle;
                 SnapshotParameters snapShotparams = new SnapshotParameters();
                 snapShotparams.setFill(Color.TRANSPARENT);
                 circle.setStroke(Color.BLUE);

@@ -17,23 +17,24 @@ public class Square extends StackPane{
     boolean empty=true;
     private AnchorPane BoardGrid;
     Grid belongsTo;
+    int x, y;
 
     Square(AnchorPane BoardGrid) {
         this.BoardGrid = BoardGrid;
         this.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                if(empty) {
-                    if(GameInfo.currentPlayer == PlayerType.O){
-                        setO();
+                if(empty && isAllowedToPlace()) {
+                    if(GameInfo.currentPlayer == PlayerType.Circle){
+                        setCircle();
                         empty = false;
-                        GameInfo.currentPlayer = PlayerType.X;
+                        GameInfo.currentPlayer = PlayerType.Cross;
                         changeCursor();
                     }
                     else{
-                        setX();
+                        setCross();
                         empty = false;
-                        GameInfo.currentPlayer = PlayerType.O;
+                        GameInfo.currentPlayer = PlayerType.Circle;
                         changeCursor();
                     }
                 }
@@ -41,19 +42,19 @@ public class Square extends StackPane{
         });
     }
 
-    public void setO(){
+    public void setCircle(){
         circle.setStroke(Color.BLUE);
         circle.setStrokeWidth(7);
         this.getChildren().add(circle);
     }
-    public void setX(){
+    public void setCross(){
         this.getChildren().add(cross);
     }
 
     public void changeCursor(){
         SnapshotParameters snapShotparams = new SnapshotParameters();
         snapShotparams.setFill(Color.TRANSPARENT);
-        if(GameInfo.currentPlayer == PlayerType.O){
+        if(GameInfo.currentPlayer == PlayerType.Circle){
             circle.setStroke(Color.BLUE);
             circle.setStrokeWidth(7);
             WritableImage image = circle.snapshot(snapShotparams, null);
@@ -64,5 +65,19 @@ public class Square extends StackPane{
             BoardGrid.setCursor(new ImageCursor(image, GameInfo.placedSize, GameInfo.placedSize));
         }
     }
+
+    public boolean isAllowedToPlace()
+    {
+        if( GameInfo.getCurrentSector() == GameInfo.SECTOR_UNRESTRICTED ||
+            belongsTo.y * 3 + belongsTo.x == GameInfo.getCurrentSector())
+        {
+            GameInfo.setCurrentSector(y * 3 + x);
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
 
 }
