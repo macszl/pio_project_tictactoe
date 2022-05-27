@@ -7,6 +7,7 @@ import javafx.scene.image.WritableImage;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.Vector;
@@ -20,12 +21,22 @@ class SquareTest {
         //dobranie sie do listy sektorow, i do listy kwadratow
 
         //ustawiamy pole poczatkowe
+        board.Grids.get(4).squares.get(4).onMouseClickEvent();
+
+        int square_obj_idx = board.Grids.get(4).squares.get(4).getChildren().size() - 1;
+        Assertions.assertSame(board.Grids.get(4).squares.get(4).getChildren().get(square_obj_idx),
+                              board.Grids.get(4).squares.get(4).circle,
+                      "Actual object differs from expected object.");
 
         //wywolujemy onMouseClickEvent w jednym polu 1000 razy
         for(int i = 0; i < 1000; i++)
         {
             board.Grids.get(4).squares.get(4).onMouseClickEvent();
+            Assertions.assertSame(board.Grids.get(4).squares.get(4).getChildren().get(square_obj_idx),
+                                  board.Grids.get(4).squares.get(4).circle,
+                          "Actual object differs from expected object");
         }
+
     }
 
     @Test
