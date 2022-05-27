@@ -42,27 +42,31 @@ class SquareTest {
     @Test
     public void massTestUserTryingToPlaceFigureInIncorrectPlaces()
     {
+
         for(int i = 0; i < 9; i++)
         {
-            //wywolanie aplikacji
+            //deklaracja boarda
 
-            //dobranie sie do listy sektorow, i do listy kwadratow
+            Board board = new Board(null, Board.CursorMode.NO_CURSOR);
+
             for(int j = 0; j < 3; j++)
             {
                 for(int k = 0; k < 3; k++)
                 {
                     //ustawienie pierwszej figury w danym sektorze
-
+                    board.Grids.get(j * 3 + k).squares.get(j * 3 + k).onMouseClickEvent();
                     //wywolanie metody testowej sprawdzajacej czy mouseeventy przejda, badz nie
-                    TestUserTryingToPlaceFigureInIncorrectPlaces( j * 3 + k);
+                    TestUserTryingToPlaceFigureInIncorrectPlaces(board, j * 3 + k);
                 }
             }
-            //zamkniecie aplikacji
+            //czyszczenie boarda
+            board = null;
+
         }
     }
 
     @Test
-    public void TestUserTryingToPlaceFigureInIncorrectPlaces(int correctSector)
+    public void TestUserTryingToPlaceFigureInIncorrectPlaces(Board board, int correctSector)
     {
         //figura ustawiona
 
@@ -76,6 +80,21 @@ class SquareTest {
                 if( i * 3 + j == correctSector)
                 {
                     continue;
+                }
+
+                for(int k = 0; k < 3; k++)
+                {
+                    for(int l = 0; l < 3; l++)
+                    {
+                        board.Grids.get( i * 3 + j).squares.get(k * 3 + l).onMouseClickEvent();
+                        int square_obj_idx = board.Grids.get(4).squares.get(4).getChildren().size() - 1;
+                        Assertions.assertNotSame(board.Grids.get(4).squares.get(4).getChildren().get(square_obj_idx),
+                                board.Grids.get(4).squares.get(4).circle,
+                                "Actual object differs from expected object.");
+                        Assertions.assertNotSame(board.Grids.get(4).squares.get(4).getChildren().get(square_obj_idx),
+                                board.Grids.get(4).squares.get(4).cross,
+                                "Actual object differs from expected object.");
+                    }
                 }
             }
         }
