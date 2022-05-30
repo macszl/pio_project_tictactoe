@@ -21,8 +21,14 @@ public class Square extends StackPane{
     Grid parent;
     int x, y;
 
-    Square(AnchorPane BoardGrid) {
+
+    Square(AnchorPane BoardGrid,int x, int y) {
         this.BoardGrid = BoardGrid;
+        this.y = y;
+        this.x = x;
+        this.resize(GameInfo.getSquareSize(),GameInfo.getSquareSize());
+        this.setLayoutX(2+GameInfo.getSquareSize()*x);
+        this.setLayoutY(y*GameInfo.getSquareSize()+1);
         this.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {

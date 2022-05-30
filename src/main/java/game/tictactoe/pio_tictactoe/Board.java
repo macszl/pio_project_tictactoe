@@ -28,42 +28,23 @@ public class Board {
         r.setStrokeWidth(5);
         return r;
     }
-    private Square createSquare(AnchorPane BoardGrid,int x, int y)
-    {
-        Square square = new Square(BoardGrid);
-        square.y = y;
-        square.x = x;
-        square.resize(90,90);
-        square.setLayoutX(2+90*y);
-        square.setLayoutY(x*90+1);
-        return square;
-    }
-    private Grid createGrid(int BoardRow, int BoardColumn)
-    {
-        Grid grid=new Grid();
-        grid.x = BoardColumn;
-        grid.y = BoardRow;
-        grid.parent = this;
-        grid.resize(280,280);
-        grid.setLayoutX(280*BoardColumn);
-        grid.setLayoutY(280*BoardRow);
-        return grid;
-    }
+
+
     CursorMode cursorMode;
     public Board(AnchorPane BoardGrid, CursorMode _cursorMode)
     {
         cursorMode = _cursorMode;
-        for(int BoardColumn=0;BoardColumn<3;BoardColumn++)
+        for(int BoardRow=0;BoardRow<3;BoardRow++)
         {
-            for(int BoardRow=0;BoardRow<3;BoardRow++)
+            for(int BoardColumn=0;BoardColumn<3;BoardColumn++)
             {
-                Grid grid=createGrid(BoardRow,BoardColumn);
-                for(int GridColumn=0;GridColumn<3;GridColumn++)
+                Grid grid=new Grid(BoardColumn,BoardRow,this);
+                for(int GridRow=0;GridRow<3;GridRow++)
                 {
-                    for(int GridRow=0;GridRow<3;GridRow++)
+                    for(int GridColumn=0;GridColumn<3;GridColumn++)
                     {
                         Rectangle r = createRectangle();
-                        Square square = createSquare(BoardGrid,GridRow,GridColumn);
+                        Square square = new Square(BoardGrid,GridColumn,GridRow);
                         square.getChildren().add(r);
                         grid.getChildren().add(square);
                         grid.squares.add(square);
@@ -85,5 +66,6 @@ public class Board {
                     BoardGrid.setCursor(new ImageCursor(image, GameInfo.placedSize, GameInfo.placedSize));
             }
         }
+        GameInfo.gameBoard=this;
     }
 }
