@@ -20,6 +20,27 @@ public class Board {
         SHAPE_CURSOR
     }
 
+    void paintSquares()
+    {
+        Grid temp= Grids.get(GameInfo.getCurrentSector());
+        for(int i=0;i<temp.squares.size();i++)
+        {
+            temp.squares.get(i).paintSquare();
+        }
+    }
+
+    void unpaintSquares()
+    {
+        for(int j=0;j<Grids.size();j++)
+        {
+            Grid temp= Grids.get(j);
+            for(int i=0;i<temp.squares.size();i++)
+            {
+                temp.squares.get(i).unpaintSquare();
+            }
+        }
+    }
+
     CursorMode cursorMode;
     public Board(AnchorPane BoardGrid, CursorMode _cursorMode)
     {
@@ -44,6 +65,7 @@ public class Board {
                         temp2.y = k;
                         temp2.x = l;
                         temp2.getChildren().add(r);
+                        temp2.rectangle=r;
                         temp2.resize(90,90);
                         temp.getChildren().add(temp2);
                         temp.squares.add(temp2);
