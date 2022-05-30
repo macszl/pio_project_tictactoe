@@ -7,6 +7,9 @@
     <list default="true" id="64111c81-8b6d-4780-9c93-a7b63714fc0c" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/game/tictactoe/pio_tictactoe/Board.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/game/tictactoe/pio_tictactoe/Board.java" afterDir="false" />
+
+      <change beforePath="$PROJECT_DIR$/src/main/java/game/tictactoe/pio_tictactoe/GameInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/game/tictactoe/pio_tictactoe/GameInfo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/game/tictactoe/pio_tictactoe/Grid.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/game/tictactoe/pio_tictactoe/Grid.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/game/tictactoe/pio_tictactoe/Square.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/game/tictactoe/pio_tictactoe/Square.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -34,14 +37,15 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">
-    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
-    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../kck/SceneBuilderRepo" />
-    <property name="settings.editor.selected.configurable" value="reference.settings.project.maven.repository.indices" />
-  </component>
+
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "last_opened_file_path": "C:/Users/reksa11/IdeaProjects/pio xo/pio_project_tictactoe"
+  }
+}]]></component>
+
   <component name="RunManager">
     <configuration name="HelloApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="game.tictactoe.pio_tictactoe.HelloApplication" />
@@ -76,7 +80,9 @@
       <workItem from="1653306956892" duration="817000" />
       <workItem from="1653389533921" duration="29000" />
       <workItem from="1653390480374" duration="109000" />
-      <workItem from="1653906122768" duration="1994000" />
+
+      <workItem from="1653906131812" duration="2007000" />
+
     </task>
     <servers />
   </component>
@@ -95,10 +101,19 @@
     </option>
   </component>
   <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/game/tictactoe/pio_tictactoe/Square.java</url>
+          <line>65</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
     <watches-manager>
       <configuration name="Application">
-        <watch expression="GameInfo" language="JAVA" />
-        <watch expression="GameInfo.nextGrid" language="JAVA" />
+        <watch expression="parent.y" language="JAVA" />
+        <watch expression="GameInfo.currentSector" language="JAVA" />
       </configuration>
     </watches-manager>
   </component>

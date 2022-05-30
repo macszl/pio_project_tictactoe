@@ -13,11 +13,21 @@ import java.util.Vector;
 public class Board {
     public Vector<Grid> Grids= new Vector<>();
 
-    static Circle circle = new Circle(GameInfo.placedSize/2,GameInfo.placedSize/2,GameInfo.placedSize/2, Color.TRANSPARENT);
+    Circle circleCursor = new Circle(GameInfo.placedSize,GameInfo.placedSize/4,GameInfo.placedSize/4,Color.TRANSPARENT);
 
     enum CursorMode {
         NO_CURSOR,
         SHAPE_CURSOR
+    }
+
+
+    private Rectangle createRectangle()
+    {
+        Rectangle r = new Rectangle(90,90);
+        r.setFill(Color.TRANSPARENT);
+        r.setStroke(Color.BLACK);
+        r.setStrokeWidth(5);
+        return r;
     }
 
     void paintSquares()
@@ -41,56 +51,45 @@ public class Board {
         }
     }
 
+
     CursorMode cursorMode;
     public Board(AnchorPane BoardGrid, CursorMode _cursorMode)
     {
         cursorMode = _cursorMode;
-        for(int i=0;i<3;i++)
+        for(int BoardRow=0;BoardRow<3;BoardRow++)
         {
-            for(int j=0;j<3;j++)
+            for(int BoardColumn=0;BoardColumn<3;BoardColumn++)
             {
-                Grid temp=new Grid();
-                temp.x = j;
-                temp.y = i;
-                temp.parent = this;
-                for(int k=0;k<3;k++)
+                Grid grid=new Grid(BoardColumn,BoardRow,this);
+                for(int GridRow=0;GridRow<3;GridRow++)
                 {
-                    for(int l=0;l<3;l++)
+                    for(int GridColumn=0;GridColumn<3;GridColumn++)
                     {
-                        Rectangle r = new Rectangle(90,90);
-                        r.setFill(Color.TRANSPARENT);
-                        r.setStroke(Color.BLACK);
-                        r.setStrokeWidth(5);
-                        Square temp2 = new Square(BoardGrid);
-                        temp2.y = k;
-                        temp2.x = l;
-                        temp2.getChildren().add(r);
-                        temp2.rectangle=r;
-                        temp2.resize(90,90);
-                        temp.getChildren().add(temp2);
-                        temp.squares.add(temp2);
-                        temp2.setLayoutX(2+90*k);
-                        temp2.setLayoutY(l*90+1);
-                        temp2.parent =temp;
+
+                        Rectangle r = createRectangle();
+                        Square square = new Square(BoardGrid,GridColumn,GridRow);
+                        square.getChildren().add(r);
+                        grid.getChildren().add(square);
+                        grid.squares.add(square);
+                        square.parent = grid;
+
                     }
                 }
-                Grids.add(temp);
-                if(BoardGrid != null)BoardGrid.getChildren().add(temp);
-                temp.resize(280,280);
-                temp.setLayoutX(280*i);
-                temp.setLayoutY(280*j);
+                Grids.add(grid);
+                if(BoardGrid != null)BoardGrid.getChildren().add(grid);
                 GameInfo.currentPlayer = PlayerType.Circle;
                 SnapshotParameters snapShotparams = new SnapshotParameters();
                 snapShotparams.setFill(Color.TRANSPARENT);
-                circle.setStroke(Color.BLUE);
-                circle.setStrokeWidth(7);
+                circleCursor.setStroke(Color.BLUE);
+                circleCursor.setStrokeWidth(4);
 
                 WritableImage image = null;
                 if(cursorMode == CursorMode.SHAPE_CURSOR )
-                    image = circle.snapshot(snapShotparams, null);
+                    image = circleCursor.snapshot(snapShotparams, null);
                 if(BoardGrid != null )
                     BoardGrid.setCursor(new ImageCursor(image, GameInfo.placedSize, GameInfo.placedSize));
             }
         }
+        GameInfo.gameBoard=this;
     }
 }
