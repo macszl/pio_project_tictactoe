@@ -20,6 +20,7 @@ public class Board {
         SHAPE_CURSOR
     }
 
+
     private Rectangle createRectangle()
     {
         Rectangle r = new Rectangle(90,90);
@@ -27,6 +28,27 @@ public class Board {
         r.setStroke(Color.BLACK);
         r.setStrokeWidth(5);
         return r;
+    }
+
+    void paintSquares()
+    {
+        Grid temp= Grids.get(GameInfo.getCurrentSector());
+        for(int i=0;i<temp.squares.size();i++)
+        {
+            temp.squares.get(i).paintSquare();
+        }
+    }
+
+    void unpaintSquares()
+    {
+        for(int j=0;j<Grids.size();j++)
+        {
+            Grid temp= Grids.get(j);
+            for(int i=0;i<temp.squares.size();i++)
+            {
+                temp.squares.get(i).unpaintSquare();
+            }
+        }
     }
 
 
@@ -43,12 +65,14 @@ public class Board {
                 {
                     for(int GridColumn=0;GridColumn<3;GridColumn++)
                     {
+
                         Rectangle r = createRectangle();
                         Square square = new Square(BoardGrid,GridColumn,GridRow);
                         square.getChildren().add(r);
                         grid.getChildren().add(square);
                         grid.squares.add(square);
                         square.parent = grid;
+
                     }
                 }
                 Grids.add(grid);

@@ -3,19 +3,27 @@ package game.tictactoe.pio_tictactoe;
 import javafx.event.EventHandler;
 import javafx.scene.ImageCursor;
 import javafx.scene.SnapshotParameters;
+import javafx.scene.image.Image;
 import javafx.scene.image.WritableImage;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
+import javafx.scene.shape.Rectangle;
+
+import java.io.File;
 
 public class Square extends StackPane{
 
+    ImagePattern nextGrid = new ImagePattern(new Image(new File("color.png").toURI().toString()));
     Circle circle = new Circle(GameInfo.placedSize/2,GameInfo.placedSize/2,GameInfo.placedSize/2,Color.TRANSPARENT);
+
     Cross cross = new Cross(8,20,20);
     Cross crossCursor = new Cross(4,10,10);
     Circle circleCursor = new Circle(GameInfo.placedSize,GameInfo.placedSize,GameInfo.placedSize/4,Color.TRANSPARENT);
+
     boolean empty=true;
     private AnchorPane BoardGrid;
     Grid parent;
@@ -67,11 +75,22 @@ public class Square extends StackPane{
             parent.y * 3 + parent.x == GameInfo.getCurrentSector())
         {
             GameInfo.setCurrentSector(y * 3 + x);
+            parent.parent.unpaintSquares();
+            parent.parent.paintSquares();
             return true;
         }
         else {
             return false;
         }
+    }
+
+    public void paintSquare()
+    {
+        this.rectangle.setFill(nextGrid);
+    }
+    public void unpaintSquare()
+    {
+        this.rectangle.setFill(null);
     }
 
     public void onMouseClickEvent() {
