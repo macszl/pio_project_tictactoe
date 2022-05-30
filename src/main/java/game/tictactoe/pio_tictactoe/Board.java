@@ -13,7 +13,7 @@ import java.util.Vector;
 public class Board {
     public Vector<Grid> Grids= new Vector<>();
 
-    Circle circleCursor = new Circle(GameInfo.placedSize,GameInfo.placedSize/4,GameInfo.placedSize/4,Color.TRANSPARENT);
+    Circle circleCursor = new Circle(GameInfo.placedSize,GameInfo.placedSize,GameInfo.placedSize/4,Color.TRANSPARENT);
 
     enum CursorMode {
         NO_CURSOR,
