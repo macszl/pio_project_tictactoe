@@ -20,43 +20,58 @@ public class Board {
         SHAPE_CURSOR
     }
 
+    private Rectangle createRectangle()
+    {
+        Rectangle r = new Rectangle(90,90);
+        r.setFill(Color.TRANSPARENT);
+        r.setStroke(Color.BLACK);
+        r.setStrokeWidth(5);
+        return r;
+    }
+    private Square createSquare(AnchorPane BoardGrid,int x, int y)
+    {
+        Square square = new Square(BoardGrid);
+        square.y = y;
+        square.x = x;
+        square.resize(90,90);
+        square.setLayoutX(2+90*y);
+        square.setLayoutY(x*90+1);
+        return square;
+    }
+    private Grid createGrid(int BoardRow, int BoardColumn)
+    {
+        Grid grid=new Grid();
+        grid.x = BoardColumn;
+        grid.y = BoardRow;
+        grid.parent = this;
+        grid.resize(280,280);
+        grid.setLayoutX(280*BoardColumn);
+        grid.setLayoutY(280*BoardRow);
+        return grid;
+    }
     CursorMode cursorMode;
     public Board(AnchorPane BoardGrid, CursorMode _cursorMode)
     {
         cursorMode = _cursorMode;
-        for(int i=0;i<3;i++)
+        for(int BoardColumn=0;BoardColumn<3;BoardColumn++)
         {
-            for(int j=0;j<3;j++)
+            for(int BoardRow=0;BoardRow<3;BoardRow++)
             {
-                Grid temp=new Grid();
-                temp.x = j;
-                temp.y = i;
-                temp.parent = this;
-                for(int k=0;k<3;k++)
+                Grid grid=createGrid(BoardRow,BoardColumn);
+                for(int GridColumn=0;GridColumn<3;GridColumn++)
                 {
-                    for(int l=0;l<3;l++)
+                    for(int GridRow=0;GridRow<3;GridRow++)
                     {
-                        Rectangle r = new Rectangle(90,90);
-                        r.setFill(Color.TRANSPARENT);
-                        r.setStroke(Color.BLACK);
-                        r.setStrokeWidth(5);
-                        Square temp2 = new Square(BoardGrid);
-                        temp2.y = k;
-                        temp2.x = l;
-                        temp2.getChildren().add(r);
-                        temp2.resize(90,90);
-                        temp.getChildren().add(temp2);
-                        temp.squares.add(temp2);
-                        temp2.setLayoutX(2+90*k);
-                        temp2.setLayoutY(l*90+1);
-                        temp2.parent =temp;
+                        Rectangle r = createRectangle();
+                        Square square = createSquare(BoardGrid,GridRow,GridColumn);
+                        square.getChildren().add(r);
+                        grid.getChildren().add(square);
+                        grid.squares.add(square);
+                        square.parent = grid;
                     }
                 }
-                Grids.add(temp);
-                if(BoardGrid != null)BoardGrid.getChildren().add(temp);
-                temp.resize(280,280);
-                temp.setLayoutX(280*i);
-                temp.setLayoutY(280*j);
+                Grids.add(grid);
+                if(BoardGrid != null)BoardGrid.getChildren().add(grid);
                 GameInfo.currentPlayer = PlayerType.Circle;
                 SnapshotParameters snapShotparams = new SnapshotParameters();
                 snapShotparams.setFill(Color.TRANSPARENT);
