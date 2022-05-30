@@ -21,14 +21,7 @@ public class Board {
     }
 
 
-    private Rectangle createRectangle()
-    {
-        Rectangle r = new Rectangle(90,90);
-        r.setFill(Color.TRANSPARENT);
-        r.setStroke(Color.BLACK);
-        r.setStrokeWidth(5);
-        return r;
-    }
+
 
     void paintSquares()
     {
@@ -60,23 +53,10 @@ public class Board {
         {
             for(int BoardColumn=0;BoardColumn<3;BoardColumn++)
             {
-                Grid grid=new Grid(BoardColumn,BoardRow,this);
-                for(int GridRow=0;GridRow<3;GridRow++)
-                {
-                    for(int GridColumn=0;GridColumn<3;GridColumn++)
-                    {
-
-                        Rectangle r = createRectangle();
-                        Square square = new Square(BoardGrid,GridColumn,GridRow);
-                        square.getChildren().add(r);
-                        grid.getChildren().add(square);
-                        grid.squares.add(square);
-                        square.parent = grid;
-
-                    }
-                }
+                Grid grid=new Grid(BoardColumn,BoardRow,this,BoardGrid);
                 Grids.add(grid);
                 if(BoardGrid != null)BoardGrid.getChildren().add(grid);
+                
                 GameInfo.currentPlayer = PlayerType.Circle;
                 SnapshotParameters snapShotparams = new SnapshotParameters();
                 snapShotparams.setFill(Color.TRANSPARENT);

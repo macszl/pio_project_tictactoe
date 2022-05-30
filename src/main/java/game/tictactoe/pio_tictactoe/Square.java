@@ -28,12 +28,23 @@ public class Square extends StackPane{
     private AnchorPane BoardGrid;
     Grid parent;
     int x, y;
+    Rectangle rectangle;
 
+    private Rectangle createRectangle()
+    {
+        Rectangle r = new Rectangle(GameInfo.getSquareSize(),GameInfo.getSquareSize());
+        r.setFill(Color.TRANSPARENT);
+        r.setStroke(Color.BLACK);
+        r.setStrokeWidth(5);
+        return r;
+    }
 
     Square(AnchorPane BoardGrid,int x, int y) {
         this.BoardGrid = BoardGrid;
         this.y = y;
         this.x = x;
+        this.rectangle=createRectangle();
+        this.getChildren().add(rectangle);
         this.resize(GameInfo.getSquareSize(),GameInfo.getSquareSize());
         this.setLayoutX(2+GameInfo.getSquareSize()*x);
         this.setLayoutY(y*GameInfo.getSquareSize()+1);
