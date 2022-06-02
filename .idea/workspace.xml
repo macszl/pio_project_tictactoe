@@ -8,7 +8,9 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/game/tictactoe/pio_tictactoe/Board.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/game/tictactoe/pio_tictactoe/Board.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/game/tictactoe/pio_tictactoe/Grid.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/game/tictactoe/pio_tictactoe/Grid.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/game/tictactoe/pio_tictactoe/GridController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/game/tictactoe/pio_tictactoe/GridController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/game/tictactoe/pio_tictactoe/Square.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/game/tictactoe/pio_tictactoe/Square.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/game/tictactoe/pio_tictactoe/mainGrid.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/game/tictactoe/pio_tictactoe/mainGrid.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,13 +37,6 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/reksa11/IdeaProjects/pio xo/pio_project_tictactoe&quot;
-  }
-}</component>
   <component name="RunManager">
     <configuration name="HelloApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="game.tictactoe.pio_tictactoe.HelloApplication" />

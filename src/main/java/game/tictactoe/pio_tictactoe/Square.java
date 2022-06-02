@@ -25,7 +25,7 @@ public class Square extends StackPane{
     Circle circleCursor = new Circle(GameInfo.placedSize,GameInfo.placedSize,GameInfo.placedSize/4,Color.TRANSPARENT);
 
     boolean empty=true;
-    private AnchorPane BoardGrid;
+    private AnchorPane boardGrid;
     Grid parent;
     int x, y;
     Rectangle rectangle;
@@ -40,7 +40,7 @@ public class Square extends StackPane{
     }
 
     Square(AnchorPane BoardGrid,int x, int y) {
-        this.BoardGrid = BoardGrid;
+        this.boardGrid = BoardGrid;
         this.y = y;
         this.x = x;
         this.rectangle=createRectangle();
@@ -72,11 +72,11 @@ public class Square extends StackPane{
             circleCursor.setStroke(Color.BLUE);
             circleCursor.setStrokeWidth(4);
             WritableImage image = circleCursor.snapshot(snapShotparams, null);
-            BoardGrid.setCursor(new ImageCursor(image, GameInfo.placedSize, GameInfo.placedSize));
+            boardGrid.setCursor(new ImageCursor(image, GameInfo.placedSize, GameInfo.placedSize));
         }
         else{
             WritableImage image = crossCursor.snapshot(snapShotparams, null);
-            BoardGrid.setCursor(new ImageCursor(image, GameInfo.placedSize, GameInfo.placedSize));
+            boardGrid.setCursor(new ImageCursor(image, GameInfo.placedSize, GameInfo.placedSize));
         }
     }
 
@@ -86,8 +86,8 @@ public class Square extends StackPane{
             parent.y * 3 + parent.x == GameInfo.getCurrentSector())
         {
             GameInfo.setCurrentSector(y * 3 + x);
-            parent.parent.unpaintSquares();
-            parent.parent.paintSquares();
+            GameInfo.gameBoard.unpaintSquares();
+            GameInfo.gameBoard.paintSquares();
             return true;
         }
         else {

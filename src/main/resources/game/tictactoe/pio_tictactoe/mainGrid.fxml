@@ -37,6 +37,6 @@
 
 <VBox prefHeight="810.0" prefWidth="810.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="game.tictactoe.pio_tictactoe.GridController">
   <children>
-    <AnchorPane fx:id="BoardGrid" maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" />
+    <AnchorPane fx:id="boardGrid" maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" />
   </children>
 </VBox>
