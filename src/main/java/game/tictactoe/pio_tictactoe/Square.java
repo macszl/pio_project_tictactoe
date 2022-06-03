@@ -111,16 +111,6 @@ public class Square extends StackPane{
         if( GameInfo.getCurrentSector() == GameInfo.SECTOR_UNRESTRICTED ||
             parent.y * 3 + parent.x == GameInfo.getCurrentSector() && !parent.getWinner())
         {
-            if( !parent.parent.getGrid(y * 3 + x).getWinner() )
-            {
-                GameInfo.setCurrentSector(y * 3 + x);
-            }
-            else
-            {
-                GameInfo.setCurrentSector(GameInfo.SECTOR_UNRESTRICTED);
-            }
-            GameInfo.gameBoard.unpaintSquares();
-            GameInfo.gameBoard.paintSquares();
             return true;
         }
         else {
@@ -159,6 +149,18 @@ public class Square extends StackPane{
                 if(this.parent.parent.cursorMode == Board.CursorMode.SHAPE_CURSOR )
                     changeCursor();
             }
+
+            if( !parent.parent.getGrid(y * 3 + x).getWinner() )
+            {
+                GameInfo.setCurrentSector(y * 3 + x);
+            }
+            else
+            {
+                GameInfo.setCurrentSector(GameInfo.SECTOR_UNRESTRICTED);
+            }
+
+            GameInfo.gameBoard.unpaintSquares();
+            GameInfo.gameBoard.paintSquares();
         }
     }
 }
