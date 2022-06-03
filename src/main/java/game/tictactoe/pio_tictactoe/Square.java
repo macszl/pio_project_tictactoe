@@ -25,10 +25,10 @@ public class Square extends StackPane{
     Circle circleCursor = new Circle(GameInfo.placedSize,GameInfo.placedSize,GameInfo.placedSize/4,Color.TRANSPARENT);
 
     boolean empty=true;
-    private AnchorPane BoardGrid;
+    private final AnchorPane BoardGrid;
     Grid parent;
     int x, y;
-    Rectangle rectangle;
+    private final Rectangle rectangle;
 
     private Rectangle createRectangle()
     {
