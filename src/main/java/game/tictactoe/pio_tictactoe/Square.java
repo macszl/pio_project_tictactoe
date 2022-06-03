@@ -10,15 +10,14 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
+import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 
 import java.io.File;
 
 public class Square extends StackPane{
-
-    ImagePattern nextGrid = new ImagePattern(new Image(new File("color.png").toURI().toString()));
-
+    
     CustomCircle circle = new CustomCircle(GameInfo.CIRCLE_CENTER,GameInfo.CIRCLE_CENTER,GameInfo.CIRCLE_RADIUS,GameInfo.CIRCLE_WIDTH);
     Cross cross = new Cross(GameInfo.CROSS_WIDTH, GameInfo.CROSS_SIZE, GameInfo.CROSS_SIZE);
     Cross crossCursor = new Cross(GameInfo.CROSS_CURSOR_WIDTH,GameInfo.CROSS_CURSOR_SIZE,GameInfo.CROSS_CURSOR_SIZE);
@@ -95,7 +94,7 @@ public class Square extends StackPane{
 
     public void paintSquare()
     {
-        this.rectangle.setFill(nextGrid);
+        this.rectangle.setFill(Paint.valueOf("cdffa6"));
     }
     public void unpaintSquare()
     {
