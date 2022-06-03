@@ -13,7 +13,9 @@ import javafx.scene.shape.Circle;
 public class Square extends StackPane{
 
     Circle circle = new Circle(GameInfo.placedSize/2,GameInfo.placedSize/2,GameInfo.placedSize/2,Color.TRANSPARENT);
-    Cross cross = new Cross();
+    Cross cross = new Cross(8,20,20);
+    Cross crossCursor = new Cross(4,10,10);
+    Circle circleCursor = new Circle(GameInfo.placedSize,GameInfo.placedSize,GameInfo.placedSize/4,Color.TRANSPARENT);
     boolean empty=true;
     private AnchorPane BoardGrid;
     Grid parent;
@@ -42,13 +44,13 @@ public class Square extends StackPane{
         SnapshotParameters snapShotparams = new SnapshotParameters();
         snapShotparams.setFill(Color.TRANSPARENT);
         if(GameInfo.currentPlayer == PlayerType.Circle){
-            circle.setStroke(Color.BLUE);
-            circle.setStrokeWidth(7);
-            WritableImage image = circle.snapshot(snapShotparams, null);
+            circleCursor.setStroke(Color.BLUE);
+            circleCursor.setStrokeWidth(4);
+            WritableImage image = circleCursor.snapshot(snapShotparams, null);
             BoardGrid.setCursor(new ImageCursor(image, GameInfo.placedSize, GameInfo.placedSize));
         }
         else{
-            WritableImage image = cross.snapshot(snapShotparams, null);
+            WritableImage image = crossCursor.snapshot(snapShotparams, null);
             BoardGrid.setCursor(new ImageCursor(image, GameInfo.placedSize, GameInfo.placedSize));
         }
     }
