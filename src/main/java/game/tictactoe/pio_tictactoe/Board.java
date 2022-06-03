@@ -11,6 +11,7 @@ import java.util.Vector;
 
 public class Board {
 
+
     public Vector<Grid> grids = new Vector<>();
     Circle circleCursor = new Circle(GameInfo.placedSize,GameInfo.placedSize/4,GameInfo.placedSize/4,Color.TRANSPARENT);
 
