@@ -9,24 +9,17 @@ public class Cross extends StackPane {
     private final Line line1 = new Line();
     private final Line line2 = new Line();
 
-    public Line getLine1() {
-        return line1;
-    }
-
-    public Line getLine2() {
-        return line2;
-    }
     public Cross(int strokeWidth, int size1, int size2){
-        line1.setStartX(GameInfo.placedSize-size1);
-        line1.setStartY(GameInfo.placedSize-size2);
-        line1.setEndX(GameInfo.placedSize+size1);
-        line1.setEndY(GameInfo.placedSize+size2);
+        line1.setStartX(-size1);
+        line1.setStartY(-size2);
+        line1.setEndX(size1);
+        line1.setEndY(size2);
         line1.setStroke(Color.RED);
         line1.setStrokeWidth(strokeWidth);
-        line2.setStartX(GameInfo.placedSize-size1);
-        line2.setStartY(GameInfo.placedSize+size2);
-        line2.setEndX(GameInfo.placedSize+size1);
-        line2.setEndY(GameInfo.placedSize-size2);
+        line2.setStartX(-size1);
+        line2.setStartY(size2);
+        line2.setEndX(size1);
+        line2.setEndY(-size2);
         line2.setStroke(Color.RED);
         line2.setStrokeWidth(strokeWidth);
         this.getChildren().add(line1);

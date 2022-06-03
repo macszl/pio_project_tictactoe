@@ -10,20 +10,18 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
+import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 
 import java.io.File;
 
 public class Square extends StackPane{
-
-    ImagePattern nextGrid;
-    Circle circle = new Circle(GameInfo.placedSize/2,GameInfo.placedSize/2,GameInfo.placedSize/2,Color.TRANSPARENT);
-    Cross cross = new Cross(8,20,20);
-
-
-    Cross crossCursor = new Cross(4,10,10);
-    Circle circleCursor = new Circle(GameInfo.placedSize,GameInfo.placedSize,GameInfo.placedSize/4,Color.TRANSPARENT);
+    
+    CustomCircle circle = new CustomCircle(GameInfo.CIRCLE_CENTER,GameInfo.CIRCLE_CENTER,GameInfo.CIRCLE_RADIUS,GameInfo.CIRCLE_WIDTH);
+    Cross cross = new Cross(GameInfo.CROSS_WIDTH, GameInfo.CROSS_SIZE, GameInfo.CROSS_SIZE);
+    Cross crossCursor = new Cross(GameInfo.CROSS_CURSOR_WIDTH,GameInfo.CROSS_CURSOR_SIZE,GameInfo.CROSS_CURSOR_SIZE);
+    CustomCircle circleCursor = new CustomCircle(GameInfo.CIRCLE_CURSOR_CENTER,GameInfo.CIRCLE_CURSOR_CENTER,GameInfo.CIRCLE_CURSOR_RADIUS,GameInfo.CIRCLE_CURSOR_WIDTH);
 
     boolean empty=true;
     private final AnchorPane boardGrid;
@@ -63,8 +61,7 @@ public class Square extends StackPane{
     }
 
     public void setCircle(){
-        circle.setStroke(Color.BLUE);
-        circle.setStrokeWidth(7);
+
         this.getChildren().add(circle);
     }
     public void setCross(){
@@ -94,9 +91,7 @@ public class Square extends StackPane{
     public void changeCursor(){
         SnapshotParameters snapShotparams = new SnapshotParameters();
         snapShotparams.setFill(Color.TRANSPARENT);
-        if(GameInfo.currentPlayer == PlayerType.Circle){
-            circleCursor.setStroke(Color.BLUE);
-            circleCursor.setStrokeWidth(4);
+        if(GameInfo.getCurrentPlayer() == PlayerType.Circle){
             WritableImage image = circleCursor.snapshot(snapShotparams, null);
             boardGrid.setCursor(new ImageCursor(image, GameInfo.placedSize, GameInfo.placedSize));
         }
@@ -120,7 +115,7 @@ public class Square extends StackPane{
 
     public void paintSquare()
     {
-        this.rectangle.setFill(nextGrid);
+        this.rectangle.setFill(Paint.valueOf("cdffa6"));
     }
     public void unpaintSquare()
     {
@@ -128,14 +123,12 @@ public class Square extends StackPane{
     }
 
     public void onMouseClickEvent() {
-        if(empty && isAllowedToPlace())
-        {
-            if(GameInfo.currentPlayer == PlayerType.Circle)
-            {
+        if(empty && isAllowedToPlace()) {
+            if(GameInfo.getCurrentPlayer() == PlayerType.Circle){
                 setCircle();
                 parent.checkWinCondition();
                 empty = false;
-                GameInfo.currentPlayer = PlayerType.Cross;
+                GameInfo.setCurrentPlayer(PlayerType.Cross);
                 if(this.parent.parent.cursorMode == Board.CursorMode.SHAPE_CURSOR )
                     changeCursor();
 
@@ -145,7 +138,7 @@ public class Square extends StackPane{
                 setCross();
                 parent.checkWinCondition();
                 empty = false;
-                GameInfo.currentPlayer = PlayerType.Circle;
+                GameInfo.setCurrentPlayer(PlayerType.Circle);
                 if(this.parent.parent.cursorMode == Board.CursorMode.SHAPE_CURSOR )
                     changeCursor();
             }

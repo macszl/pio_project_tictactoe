@@ -1,15 +1,35 @@
 package game.tictactoe.pio_tictactoe;
 
 public class GameInfo {
-    static int placedSize=50;
-    static final int gridSize=280;
-    static final int squareSize=90;
+    public static final int CROSS_SIZE = 20;
+    public static final int CROSS_WIDTH = 8;
+    public static final int CIRCLE_CENTER = 25;
+    public static final int CIRCLE_RADIUS = 25;
+    public static final int CIRCLE_WIDTH = 7;
+    public static final int CROSS_CURSOR_SIZE = 10;
+    public static final int CROSS_CURSOR_WIDTH = 4;
+    public static final int CIRCLE_CURSOR_CENTER = 0;
+    public static final int CIRCLE_CURSOR_RADIUS = 12;
+    public static final int CIRCLE_CURSOR_WIDTH = 4;
+
+    public static final int placedSize=50;
+    public static final int gridSize=280;
+    private static final int squareSize=90;
 
     static Board gameBoard;
-    static PlayerType currentPlayer;
+
+    private static PlayerType currentPlayer;
+
+    public static void setCurrentPlayer(PlayerType currentPlayer) {
+        GameInfo.currentPlayer = currentPlayer;
+    }
+
+    public static PlayerType getCurrentPlayer() {
+        return currentPlayer;
+    }
 
     public static final int SECTOR_UNRESTRICTED = -1;
-    static int currentSector = SECTOR_UNRESTRICTED;
+    private static int currentSector = SECTOR_UNRESTRICTED;
 
     public static int getCurrentSector() {
         return currentSector;
