@@ -27,10 +27,12 @@ public class Board {
         {
             for(int i = 0; i< grids.size(); i++)
             {
-                grids.get(i).paintSquares();
+                if(!grids.get(i).getWinner())
+                    grids.get(i).paintSquares();
             }
         }
-        else grids.get(GameInfo.getCurrentSector()).paintSquares();
+        else
+            grids.get(GameInfo.getCurrentSector()).paintSquares();
 
     }
 
@@ -67,5 +69,10 @@ public class Board {
             }
         }
         GameInfo.gameBoard=this;
+    }
+
+    public Grid getGrid(int gridNum)
+    {
+        return grids.get(gridNum);
     }
 }

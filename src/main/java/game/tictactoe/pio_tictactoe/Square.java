@@ -24,7 +24,7 @@ public class Square extends StackPane{
     CustomCircle circleCursor = new CustomCircle(GameInfo.CIRCLE_CURSOR_CENTER,GameInfo.CIRCLE_CURSOR_CENTER,GameInfo.CIRCLE_CURSOR_RADIUS,GameInfo.CIRCLE_CURSOR_WIDTH);
 
     boolean empty=true;
-    private AnchorPane boardGrid;
+    private final AnchorPane boardGrid;
 
     Grid parent;
     int x, y;
@@ -48,9 +48,13 @@ public class Square extends StackPane{
         this.resize(GameInfo.getSquareSize(),GameInfo.getSquareSize());
         this.setLayoutX(2+GameInfo.getSquareSize()*x);
         this.setLayoutY(y*GameInfo.getSquareSize()+1);
-        this.setOnMouseClicked(new EventHandler<MouseEvent>() {
+        if(boardGrid != null)
+            this.nextGrid = new ImagePattern(new Image(new File("color.png").toURI().toString()));
+        this.setOnMouseClicked(new EventHandler<>()
+        {
             @Override
-            public void handle(MouseEvent mouseEvent) {
+            public void handle (MouseEvent mouseEvent)
+            {
                 onMouseClickEvent();
             }
         });
@@ -62,6 +66,26 @@ public class Square extends StackPane{
     }
     public void setCross(){
         this.getChildren().add(cross);
+    }
+
+    public boolean checkCross()
+    {
+        if ( this.getChildren().size() == 2)
+        {
+            if(this.getChildren().get(1).getClass() == Cross.class)
+                return true;
+        }
+        return false;
+    }
+
+    public boolean checkCircle()
+    {
+        if ( this.getChildren().size() == 2)
+        {
+            if(this.getChildren().get(1).getClass() == Circle.class)
+                return true;
+        }
+        return false;
     }
 
     public void changeCursor(){
@@ -80,11 +104,8 @@ public class Square extends StackPane{
     public boolean isAllowedToPlace()
     {
         if( GameInfo.getCurrentSector() == GameInfo.SECTOR_UNRESTRICTED ||
-            parent.y * 3 + parent.x == GameInfo.getCurrentSector())
+            parent.y * 3 + parent.x == GameInfo.getCurrentSector() && !parent.getWinner())
         {
-            GameInfo.setCurrentSector(y * 3 + x);
-            GameInfo.gameBoard.unpaintSquares();
-            GameInfo.gameBoard.paintSquares();
             return true;
         }
         else {
@@ -105,18 +126,34 @@ public class Square extends StackPane{
         if(empty && isAllowedToPlace()) {
             if(GameInfo.getCurrentPlayer() == PlayerType.Circle){
                 setCircle();
+                parent.checkWinCondition();
                 empty = false;
                 GameInfo.setCurrentPlayer(PlayerType.Cross);
                 if(this.parent.parent.cursorMode == Board.CursorMode.SHAPE_CURSOR )
                     changeCursor();
+
             }
-            else{
+            else
+            {
                 setCross();
+                parent.checkWinCondition();
                 empty = false;
                 GameInfo.setCurrentPlayer(PlayerType.Circle);
                 if(this.parent.parent.cursorMode == Board.CursorMode.SHAPE_CURSOR )
                     changeCursor();
             }
+
+            if( !parent.parent.getGrid(y * 3 + x).getWinner() && !parent.isFull())
+            {
+                GameInfo.setCurrentSector(y * 3 + x);
+            }
+            else
+            {
+                GameInfo.setCurrentSector(GameInfo.SECTOR_UNRESTRICTED);
+            }
+
+            GameInfo.gameBoard.unpaintSquares();
+            GameInfo.gameBoard.paintSquares();
         }
     }
 }
