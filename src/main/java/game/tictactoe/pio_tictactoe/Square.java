@@ -150,7 +150,7 @@ public class Square extends StackPane{
                     changeCursor();
             }
 
-            if( !parent.parent.getGrid(y * 3 + x).getWinner() )
+            if( !parent.parent.getGrid(y * 3 + x).getWinner() && !parent.isFull())
             {
                 GameInfo.setCurrentSector(y * 3 + x);
             }

@@ -115,4 +115,14 @@ public class Grid  extends AnchorPane {
         }
     }
 
+    boolean isFull()
+    {
+        for(int i = 0; i < 9; i++)
+        {
+            if( squares.get(i).empty)
+                return false;
+        }
+        return true;
+    }
+
 }
