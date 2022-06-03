@@ -10,6 +10,8 @@ public class Grid  extends AnchorPane {
     int x, y;
     public Board parent;
 
+    private boolean winner;
+
     public Grid(int boardColumn, int boardRow,Board _parent,AnchorPane boardGrid)
     {
         this.x = boardColumn;
@@ -18,6 +20,7 @@ public class Grid  extends AnchorPane {
         this.resize(GameInfo.gridSize,GameInfo.gridSize);
         this.setLayoutX(GameInfo.gridSize*boardColumn);
         this.setLayoutY(GameInfo.gridSize*boardRow);
+        this.winner = false;
 
         for(int gridRow=0;gridRow<3;gridRow++)
         {
@@ -46,4 +49,70 @@ public class Grid  extends AnchorPane {
             square.unpaintSquare();
         }
     }
+
+    boolean getWinner()
+    {
+        return this.winner;
+    }
+
+    void checkWinCondition()
+    {
+        if(winner)
+            return;
+
+        for(int i = 0; i < 3; i++)
+            checkColumn(i);
+        for(int i = 0; i < 3; i++)
+            checkRow(i);
+        checkLeftUpDiagonal();
+        checkRightUpDiagonal();
+    }
+
+    void checkRow(int row)
+    {
+        if(winner)
+            return;
+
+        if( (squares.get(row * 3).checkCross()  && squares.get(row * 3 + 1).checkCross()  && squares.get(row * 3 + 2).checkCross() )||
+            (squares.get(row * 3).checkCircle() && squares.get(row * 3 + 1).checkCircle() && squares.get(row * 3 + 2).checkCircle() ))
+        {
+            this.winner = true;
+        }
+    }
+
+    void checkColumn(int col)
+    {
+        if(winner)
+            return;
+
+        if( (squares.get(col).checkCross()  && squares.get(col + 3).checkCross()  && squares.get(col + 6).checkCross() )||
+            (squares.get(col).checkCircle() && squares.get(col + 3).checkCircle() && squares.get(col + 6).checkCircle() ))
+        {
+            this.winner = true;
+        }
+    }
+
+    void checkLeftUpDiagonal()
+    {
+        if(winner)
+            return;
+
+        if( (squares.get(0).checkCross()  && squares.get(4).checkCross()  && squares.get(8).checkCross() )||
+            (squares.get(0).checkCircle() && squares.get(4).checkCircle() && squares.get(8).checkCircle() ))
+        {
+            this.winner = true;
+        }
+    }
+    void checkRightUpDiagonal()
+    {
+        if(winner)
+            return;
+
+        if( (squares.get(2).checkCross()  && squares.get(4).checkCross()  && squares.get(6).checkCross() )||
+            (squares.get(2).checkCircle() && squares.get(4).checkCircle() && squares.get(6).checkCircle() ))
+        {
+            this.winner = true;
+        }
+    }
+
 }
