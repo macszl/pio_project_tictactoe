@@ -6,13 +6,12 @@ import javafx.scene.image.WritableImage;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
-import javafx.scene.shape.Rectangle;
 
 import java.util.Vector;
 
 public class Board {
-    private Vector<Grid> Grids= new Vector<>();
 
+    public Vector<Grid> grids = new Vector<>();
     Circle circleCursor = new Circle(GameInfo.placedSize,GameInfo.placedSize/4,GameInfo.placedSize/4,Color.TRANSPARENT);
 
     enum CursorMode {
@@ -21,26 +20,24 @@ public class Board {
     }
 
 
-
-
     void paintSquares()
     {
-        Grid temp= Grids.get(GameInfo.getCurrentSector());
-        for(int i=0;i<temp.squares.size();i++)
+        if(GameInfo.getCurrentSector()==GameInfo.SECTOR_UNRESTRICTED)
         {
-            temp.squares.get(i).paintSquare();
+            for(int i = 0; i< grids.size(); i++)
+            {
+                grids.get(i).paintSquares();
+            }
         }
+        else grids.get(GameInfo.getCurrentSector()).paintSquares();
+
     }
 
     void unpaintSquares()
     {
-        for(int j=0;j<Grids.size();j++)
+        for(int j = 0; j< grids.size(); j++)
         {
-            Grid temp= Grids.get(j);
-            for(int i=0;i<temp.squares.size();i++)
-            {
-                temp.squares.get(i).unpaintSquare();
-            }
+            grids.get(j).unpaintSquares();
         }
     }
 
@@ -54,7 +51,7 @@ public class Board {
             for(int BoardColumn=0;BoardColumn<3;BoardColumn++)
             {
                 Grid grid=new Grid(BoardColumn,BoardRow,this,BoardGrid);
-                Grids.add(grid);
+                grids.add(grid);
                 if(BoardGrid != null)BoardGrid.getChildren().add(grid);
 
                 GameInfo.currentPlayer = PlayerType.Circle;
