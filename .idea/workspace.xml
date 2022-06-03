@@ -37,16 +37,18 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "last_opened_file_path": "C:/Users/reksa11/IdeaProjects/pio xo/pio_project_tictactoe"
-  }
-}]]></component>
-
-  <component name="RunManager">
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="reference.settings.project.maven.repository.indices" />
+  </component>
+  <component name="RunManager" selected="Application.HelloApplication">
     <configuration name="HelloApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="game.tictactoe.pio_tictactoe.HelloApplication" />
       <module name="pio_project_tictactoe" />
@@ -60,9 +62,26 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="SquareTest.userTryingToPlaceSeveralPiecesOnOneSquareTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="pio_project_tictactoe" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="game.tictactoe.pio_tictactoe.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="game.tictactoe.pio_tictactoe" />
+      <option name="MAIN_CLASS_NAME" value="game.tictactoe.pio_tictactoe.SquareTest" />
+      <option name="METHOD_NAME" value="userTryingToPlaceSeveralPiecesOnOneSquareTest" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="Application.HelloApplication" />
+        <item itemvalue="JUnit.SquareTest.userTryingToPlaceSeveralPiecesOnOneSquareTest" />
       </list>
     </recent_temporary>
   </component>
