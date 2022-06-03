@@ -6,6 +6,10 @@ import java.util.Vector;
 
 public class Grid  extends AnchorPane {
 
+    Vector<Square> squares = new Vector<>();
+    int x, y;
+    public Board parent;
+
     public Grid(int boardColumn, int boardRow,Board _parent,AnchorPane boardGrid)
     {
         this.x = boardColumn;
@@ -30,19 +34,16 @@ public class Grid  extends AnchorPane {
 
     void paintSquares()
     {
-        for(int i=0;i<this.squares.size();i++)
+        for (Square square : this.squares)
         {
-            this.squares.get(i).paintSquare();
+            square.paintSquare();
         }
     }
     void unpaintSquares()
     {
-        for(int i=0;i<this.squares.size();i++)
+        for (Square square : this.squares)
         {
-            this.squares.get(i).unpaintSquare();
+            square.unpaintSquare();
         }
     }
-    Vector<Square> squares = new Vector<>();
-    int x, y;
-    public Board parent;
 }

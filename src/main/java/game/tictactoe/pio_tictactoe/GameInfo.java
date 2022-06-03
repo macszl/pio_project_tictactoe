@@ -17,7 +17,7 @@ public class GameInfo {
 
     public static void setCurrentSector( int _newSector)
     {
-        if(_newSector >= 0 && _newSector < 9)
+        if((_newSector >= 0 && _newSector < 9 )|| _newSector == GameInfo.SECTOR_UNRESTRICTED)
             currentSector = _newSector;
     }
 

@@ -6,8 +6,8 @@ import javafx.scene.shape.Line;
 
 public class Cross extends StackPane {
 
-    private Line line1 = new Line();
-    private Line line2 = new Line();
+    private final Line line1 = new Line();
+    private final Line line2 = new Line();
 
     public Line getLine1() {
         return line1;

@@ -17,7 +17,7 @@ import java.io.File;
 
 public class Square extends StackPane{
 
-    ImagePattern nextGrid = new ImagePattern(new Image(new File("color.png").toURI().toString()));
+    ImagePattern nextGrid;
     Circle circle = new Circle(GameInfo.placedSize/2,GameInfo.placedSize/2,GameInfo.placedSize/2,Color.TRANSPARENT);
 
     Cross cross = new Cross(8,20,20);
@@ -25,7 +25,7 @@ public class Square extends StackPane{
     Circle circleCursor = new Circle(GameInfo.placedSize,GameInfo.placedSize,GameInfo.placedSize/4,Color.TRANSPARENT);
 
     boolean empty=true;
-    private AnchorPane boardGrid;
+    private final AnchorPane boardGrid;
 
     Grid parent;
     int x, y;
@@ -49,9 +49,13 @@ public class Square extends StackPane{
         this.resize(GameInfo.getSquareSize(),GameInfo.getSquareSize());
         this.setLayoutX(2+GameInfo.getSquareSize()*x);
         this.setLayoutY(y*GameInfo.getSquareSize()+1);
-        this.setOnMouseClicked(new EventHandler<MouseEvent>() {
+        if(boardGrid != null)
+            this.nextGrid = new ImagePattern(new Image(new File("color.png").toURI().toString()));
+        this.setOnMouseClicked(new EventHandler<>()
+        {
             @Override
-            public void handle(MouseEvent mouseEvent) {
+            public void handle (MouseEvent mouseEvent)
+            {
                 onMouseClickEvent();
             }
         });
