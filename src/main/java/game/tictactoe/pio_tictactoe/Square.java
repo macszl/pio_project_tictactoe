@@ -19,8 +19,9 @@ public class Square extends StackPane{
 
     ImagePattern nextGrid;
     Circle circle = new Circle(GameInfo.placedSize/2,GameInfo.placedSize/2,GameInfo.placedSize/2,Color.TRANSPARENT);
-
     Cross cross = new Cross(8,20,20);
+
+
     Cross crossCursor = new Cross(4,10,10);
     Circle circleCursor = new Circle(GameInfo.placedSize,GameInfo.placedSize,GameInfo.placedSize/4,Color.TRANSPARENT);
 
@@ -70,6 +71,26 @@ public class Square extends StackPane{
         this.getChildren().add(cross);
     }
 
+    public boolean checkCross()
+    {
+        if ( this.getChildren().size() == 2)
+        {
+            if(this.getChildren().get(1).getClass() == Cross.class)
+                return true;
+        }
+        return false;
+    }
+
+    public boolean checkCircle()
+    {
+        if ( this.getChildren().size() == 2)
+        {
+            if(this.getChildren().get(1).getClass() == Circle.class)
+                return true;
+        }
+        return false;
+    }
+
     public void changeCursor(){
         SnapshotParameters snapShotparams = new SnapshotParameters();
         snapShotparams.setFill(Color.TRANSPARENT);
@@ -88,11 +109,8 @@ public class Square extends StackPane{
     public boolean isAllowedToPlace()
     {
         if( GameInfo.getCurrentSector() == GameInfo.SECTOR_UNRESTRICTED ||
-            parent.y * 3 + parent.x == GameInfo.getCurrentSector())
+            parent.y * 3 + parent.x == GameInfo.getCurrentSector() && !parent.getWinner())
         {
-            GameInfo.setCurrentSector(y * 3 + x);
-            GameInfo.gameBoard.unpaintSquares();
-            GameInfo.gameBoard.paintSquares();
             return true;
         }
         else {
@@ -110,21 +128,39 @@ public class Square extends StackPane{
     }
 
     public void onMouseClickEvent() {
-        if(empty && isAllowedToPlace()) {
-            if(GameInfo.currentPlayer == PlayerType.Circle){
+        if(empty && isAllowedToPlace())
+        {
+            if(GameInfo.currentPlayer == PlayerType.Circle)
+            {
                 setCircle();
+                parent.checkWinCondition();
                 empty = false;
                 GameInfo.currentPlayer = PlayerType.Cross;
                 if(this.parent.parent.cursorMode == Board.CursorMode.SHAPE_CURSOR )
                     changeCursor();
+
             }
-            else{
+            else
+            {
                 setCross();
+                parent.checkWinCondition();
                 empty = false;
                 GameInfo.currentPlayer = PlayerType.Circle;
                 if(this.parent.parent.cursorMode == Board.CursorMode.SHAPE_CURSOR )
                     changeCursor();
             }
+
+            if( !parent.parent.getGrid(y * 3 + x).getWinner() )
+            {
+                GameInfo.setCurrentSector(y * 3 + x);
+            }
+            else
+            {
+                GameInfo.setCurrentSector(GameInfo.SECTOR_UNRESTRICTED);
+            }
+
+            GameInfo.gameBoard.unpaintSquares();
+            GameInfo.gameBoard.paintSquares();
         }
     }
 }
