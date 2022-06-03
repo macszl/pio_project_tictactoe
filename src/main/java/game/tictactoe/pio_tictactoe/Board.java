@@ -13,7 +13,7 @@ public class Board {
 
 
     public Vector<Grid> grids = new Vector<>();
-    Circle circleCursor = new Circle(GameInfo.placedSize,GameInfo.placedSize/4,GameInfo.placedSize/4,Color.TRANSPARENT);
+    CustomCircle circleCursor = new CustomCircle(GameInfo.CIRCLE_CURSOR_CENTER,GameInfo.CIRCLE_CURSOR_CENTER,GameInfo.CIRCLE_CURSOR_RADIUS,GameInfo.CIRCLE_CURSOR_WIDTH);
 
     enum CursorMode {
         NO_CURSOR,
@@ -55,11 +55,9 @@ public class Board {
                 grids.add(grid);
                 if(BoardGrid != null)BoardGrid.getChildren().add(grid);
 
-                GameInfo.currentPlayer = PlayerType.Circle;
+                GameInfo.setCurrentPlayer(PlayerType.Circle);
                 SnapshotParameters snapShotparams = new SnapshotParameters();
                 snapShotparams.setFill(Color.TRANSPARENT);
-                circleCursor.setStroke(Color.BLUE);
-                circleCursor.setStrokeWidth(4);
 
                 WritableImage image = null;
                 if(cursorMode == CursorMode.SHAPE_CURSOR )
