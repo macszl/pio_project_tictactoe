@@ -5,7 +5,6 @@ import javafx.scene.SnapshotParameters;
 import javafx.scene.image.WritableImage;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
 
 import java.util.Vector;
 
@@ -20,7 +19,14 @@ public class Board {
         SHAPE_CURSOR
     }
 
-
+    enum EndGameStatus
+    {
+        CIRCLE_WIN,
+        CROSS_WIN,
+        TIE
+    }
+    private EndGameStatus winStatus = null;
+    
     void paintSquares()
     {
         if(GameInfo.getCurrentSector()==GameInfo.SECTOR_UNRESTRICTED)
@@ -74,5 +80,80 @@ public class Board {
     public Grid getGrid(int gridNum)
     {
         return grids.get(gridNum);
+    }
+
+    public void checkWinStatus()
+    {
+
+        for(int i = 0; i < 3; i++)
+            this.checkColumn(i);
+        for(int i = 0; i < 3; i++)
+            this.checkRow(i);
+        this.checkLeftUpDiagonal();
+        this.checkRightUpDiagonal();
+
+        this.checkTie();
+    }
+
+    void checkRow(int row)
+    {
+        if( (grids.get(row * 3).checkCross()  && grids.get(row * 3 + 1).checkCross()  && grids.get(row * 3 + 2).checkCross() ))
+        {
+            this.winStatus = EndGameStatus.CROSS_WIN;
+        }
+        else if( (grids.get(row * 3).checkCircle() && grids.get(row * 3 + 1).checkCircle() && grids.get(row * 3 + 2).checkCircle() ))
+        {
+            this.winStatus = EndGameStatus.CIRCLE_WIN;
+        }
+
+    }
+
+    void checkColumn(int col)
+    {
+        if( (grids.get(col).checkCross()  && grids.get(col + 3).checkCross()  && grids.get(col + 6).checkCross() ))
+        {
+            this.winStatus = EndGameStatus.CROSS_WIN;
+        }
+        else if( (grids.get(col).checkCircle() && grids.get(col + 3).checkCircle() && grids.get(col + 6).checkCircle() ))
+        {
+            this.winStatus = EndGameStatus.CIRCLE_WIN;
+        }
+    }
+
+    void checkLeftUpDiagonal()
+    {
+        if( (grids.get(0).checkCross()  && grids.get(4).checkCross()  && grids.get(8).checkCross() ))
+        {
+            this.winStatus = EndGameStatus.CROSS_WIN;
+        }
+        else if( (grids.get(0).checkCircle() && grids.get(4).checkCircle() && grids.get(8).checkCircle() ))
+        {
+            this.winStatus = EndGameStatus.CIRCLE_WIN;
+        }
+    }
+    void checkRightUpDiagonal()
+    {
+        if( (grids.get(2).checkCross()  && grids.get(4).checkCross()  && grids.get(6).checkCross() ))
+        {
+            this.winStatus = EndGameStatus.CROSS_WIN;
+        }
+        else if((grids.get(2).checkCircle() && grids.get(4).checkCircle() && grids.get(6).checkCircle() ))
+        {
+            this.winStatus = EndGameStatus.CIRCLE_WIN;
+        }
+    }
+
+    boolean checkTie ()
+    {
+        if(winStatus != null)
+            return false;
+
+        for(int i = 0; i < 9; i++)
+        {
+            if( !grids.get(i).isFull())
+                return false;
+        }
+        
+        return true;
     }
 }

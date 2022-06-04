@@ -11,6 +11,7 @@ public class Grid  extends AnchorPane {
     public Board parent;
 
     private boolean winner;
+    private PlayerType playerType = null;
 
     public Grid(int boardColumn, int boardRow,Board _parent,AnchorPane boardGrid)
     {
@@ -61,11 +62,11 @@ public class Grid  extends AnchorPane {
             return;
 
         for(int i = 0; i < 3; i++)
-            checkColumn(i);
+            this.checkColumn(i);
         for(int i = 0; i < 3; i++)
-            checkRow(i);
-        checkLeftUpDiagonal();
-        checkRightUpDiagonal();
+            this.checkRow(i);
+        this.checkLeftUpDiagonal();
+        this.checkRightUpDiagonal();
     }
 
     void checkRow(int row)
@@ -73,11 +74,17 @@ public class Grid  extends AnchorPane {
         if(winner)
             return;
 
-        if( (squares.get(row * 3).checkCross()  && squares.get(row * 3 + 1).checkCross()  && squares.get(row * 3 + 2).checkCross() )||
-            (squares.get(row * 3).checkCircle() && squares.get(row * 3 + 1).checkCircle() && squares.get(row * 3 + 2).checkCircle() ))
+        if( (squares.get(row * 3).checkCross()  && squares.get(row * 3 + 1).checkCross()  && squares.get(row * 3 + 2).checkCross() ))
         {
             this.winner = true;
+            this.playerType = PlayerType.Cross;
         }
+        else if( (squares.get(row * 3).checkCircle() && squares.get(row * 3 + 1).checkCircle() && squares.get(row * 3 + 2).checkCircle() ))
+        {
+            this.winner = true;
+            this.playerType = PlayerType.Circle;
+        }
+
     }
 
     void checkColumn(int col)
@@ -85,10 +92,15 @@ public class Grid  extends AnchorPane {
         if(winner)
             return;
 
-        if( (squares.get(col).checkCross()  && squares.get(col + 3).checkCross()  && squares.get(col + 6).checkCross() )||
-            (squares.get(col).checkCircle() && squares.get(col + 3).checkCircle() && squares.get(col + 6).checkCircle() ))
+        if( (squares.get(col).checkCross()  && squares.get(col + 3).checkCross()  && squares.get(col + 6).checkCross() ))
         {
             this.winner = true;
+            this.playerType = PlayerType.Cross;
+        }
+        else if( (squares.get(col).checkCircle() && squares.get(col + 3).checkCircle() && squares.get(col + 6).checkCircle() ))
+        {
+            this.winner = true;
+            this.playerType = PlayerType.Circle;
         }
     }
 
@@ -97,10 +109,15 @@ public class Grid  extends AnchorPane {
         if(winner)
             return;
 
-        if( (squares.get(0).checkCross()  && squares.get(4).checkCross()  && squares.get(8).checkCross() )||
-            (squares.get(0).checkCircle() && squares.get(4).checkCircle() && squares.get(8).checkCircle() ))
+        if( (squares.get(0).checkCross()  && squares.get(4).checkCross()  && squares.get(8).checkCross() ))
         {
             this.winner = true;
+            this.playerType = PlayerType.Cross;
+        }
+        else if( (squares.get(0).checkCircle() && squares.get(4).checkCircle() && squares.get(8).checkCircle() ))
+        {
+            this.winner = true;
+            this.playerType = PlayerType.Circle;
         }
     }
     void checkRightUpDiagonal()
@@ -108,10 +125,15 @@ public class Grid  extends AnchorPane {
         if(winner)
             return;
 
-        if( (squares.get(2).checkCross()  && squares.get(4).checkCross()  && squares.get(6).checkCross() )||
-            (squares.get(2).checkCircle() && squares.get(4).checkCircle() && squares.get(6).checkCircle() ))
+        if( (squares.get(2).checkCross()  && squares.get(4).checkCross()  && squares.get(6).checkCross() ))
         {
             this.winner = true;
+            this.playerType = PlayerType.Cross;
+        }
+        else if((squares.get(2).checkCircle() && squares.get(4).checkCircle() && squares.get(6).checkCircle() ))
+        {
+            this.winner = true;
+            this.playerType = PlayerType.Circle;
         }
     }
 
@@ -123,6 +145,16 @@ public class Grid  extends AnchorPane {
                 return false;
         }
         return true;
+    }
+
+    boolean checkCross()
+    {
+        return this.winner && this.playerType == PlayerType.Cross;
+    }
+
+    boolean checkCircle()
+    {
+        return this.winner && this.playerType == PlayerType.Circle;
     }
 
 }
