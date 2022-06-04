@@ -25,4 +25,23 @@ public class Cross extends StackPane {
         this.getChildren().add(line1);
         this.getChildren().add(line2);
     }
+
+    public Cross(int strokeWidth, int size1, int size2, int x, int y){
+        line1.setStartX(-size1);
+        line1.setStartY(-size2);
+        line1.setEndX(size1);
+        line1.setEndY(size2);
+        line1.setStroke(Color.RED);
+        line1.setStrokeWidth(strokeWidth);
+        line2.setStartX(-size1);
+        line2.setStartY(size2);
+        line2.setEndX(size1);
+        line2.setEndY(-size2);
+        line2.setStroke(Color.RED);
+        line2.setStrokeWidth(strokeWidth);
+        this.setLayoutX(x);
+        this.setLayoutY(y);
+        this.getChildren().add(line1);
+        this.getChildren().add(line2);
+    }
 }

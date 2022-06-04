@@ -11,7 +11,13 @@ public class GameInfo {
     public static final int CIRCLE_CURSOR_CENTER = 0;
     public static final int CIRCLE_CURSOR_RADIUS = 12;
     public static final int CIRCLE_CURSOR_WIDTH = 4;
-
+    public static final int BIG_CIRCLE_COORDINATES = 30;
+    public static final int BIG_CIRCLE_RADIUS = 100;
+    public static final int BIG_CIRCLE_WIDTH = 20;
+    public static final int BIG_CROSS_COORDINATES = 20;
+    public static final int BIG_CROSS_WIDTH = 30;
+    public static final int BIG_CROSS_SIZE = 100;
+    public static final String FILL_COLOR = "cdffa6";
     public static final int placedSize=50;
     public static final int gridSize=280;
     private static final int squareSize=90;
