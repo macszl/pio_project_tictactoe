@@ -80,7 +80,7 @@ public class Square extends StackPane{
     {
         if ( this.getChildren().size() == 2)
         {
-            if(this.getChildren().get(1).getClass() == Circle.class)
+            if(this.getChildren().get(1).getClass() == CustomCircle.class)
                 return true;
         }
         return false;

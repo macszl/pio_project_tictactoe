@@ -67,6 +67,8 @@ public class Grid  extends AnchorPane {
             this.checkRow(i);
         this.checkLeftUpDiagonal();
         this.checkRightUpDiagonal();
+
+        parent.checkWinStatus();
     }
 
     void checkRow(int row)
