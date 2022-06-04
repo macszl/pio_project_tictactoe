@@ -21,5 +21,9 @@ public class GridController implements Initializable {
         board.paintSquares();
     }
 
+    public static void switchToEndGameWindow(EndGameStatus status)
+    {
+
+    }
 
 }

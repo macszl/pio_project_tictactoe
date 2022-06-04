@@ -1,12 +1,23 @@
 package game.tictactoe.pio_tictactoe;
 
+import javafx.fxml.FXMLLoader;
 import javafx.scene.ImageCursor;
+import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.image.WritableImage;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
+import javafx.stage.Stage;
 
 import java.util.Vector;
+
+enum EndGameStatus
+{
+    CIRCLE_WIN,
+    CROSS_WIN,
+    TIE
+}
 
 public class Board {
 
@@ -19,12 +30,6 @@ public class Board {
         SHAPE_CURSOR
     }
 
-    enum EndGameStatus
-    {
-        CIRCLE_WIN,
-        CROSS_WIN,
-        TIE
-    }
     private EndGameStatus winStatus = null;
     
     void paintSquares()
@@ -84,7 +89,6 @@ public class Board {
 
     public void checkWinStatus()
     {
-
         for(int i = 0; i < 3; i++)
             this.checkColumn(i);
         for(int i = 0; i < 3; i++)
@@ -93,10 +97,18 @@ public class Board {
         this.checkRightUpDiagonal();
 
         this.checkTie();
+
+        if(winStatus != null)
+        {
+            GridController.switchToEndGameWindow(winStatus);
+        }
     }
 
     void checkRow(int row)
     {
+        if(winStatus != null)
+            return;
+
         if( (grids.get(row * 3).checkCross()  && grids.get(row * 3 + 1).checkCross()  && grids.get(row * 3 + 2).checkCross() ))
         {
             this.winStatus = EndGameStatus.CROSS_WIN;
@@ -110,6 +122,9 @@ public class Board {
 
     void checkColumn(int col)
     {
+        if(winStatus != null)
+            return;
+
         if( (grids.get(col).checkCross()  && grids.get(col + 3).checkCross()  && grids.get(col + 6).checkCross() ))
         {
             this.winStatus = EndGameStatus.CROSS_WIN;
@@ -122,6 +137,9 @@ public class Board {
 
     void checkLeftUpDiagonal()
     {
+        if(winStatus != null)
+            return;
+
         if( (grids.get(0).checkCross()  && grids.get(4).checkCross()  && grids.get(8).checkCross() ))
         {
             this.winStatus = EndGameStatus.CROSS_WIN;
@@ -133,6 +151,9 @@ public class Board {
     }
     void checkRightUpDiagonal()
     {
+        if(winStatus != null)
+            return;
+
         if( (grids.get(2).checkCross()  && grids.get(4).checkCross()  && grids.get(6).checkCross() ))
         {
             this.winStatus = EndGameStatus.CROSS_WIN;
