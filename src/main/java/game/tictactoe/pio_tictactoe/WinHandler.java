@@ -22,7 +22,7 @@ class WinHandler
 	public void switchToEndGameWindow(EndGameStatus status) throws IOException
 	{
 		Stage stage = (Stage) boardGrid.getScene().getWindow();
-		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("playerselect.fxml"));
+		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("endGame.fxml"));
 		Scene scene = new Scene(fxmlLoader.load(), 270, 270);
 		stage.setScene(scene);
 		stage.show();
