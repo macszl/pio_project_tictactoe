@@ -11,12 +11,10 @@ public
 class WinHandler
 {
 	AnchorPane boardGrid;
-	private EndGameStatus currentStatus;
 
 	public WinHandler(AnchorPane _boardGrid)
 	{
 		boardGrid = _boardGrid;
-		currentStatus = null;
 	}
 
 	public void switchToEndGameWindow(EndGameStatus status) throws IOException
@@ -26,10 +24,5 @@ class WinHandler
 		Scene scene = new Scene(fxmlLoader.load(), 270, 270);
 		stage.setScene(scene);
 		stage.show();
-	}
-
-	public void setCurrentStatus(EndGameStatus _currentStatus)
-	{
-		currentStatus = _currentStatus;
 	}
 }

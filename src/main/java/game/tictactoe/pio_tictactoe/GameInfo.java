@@ -16,6 +16,11 @@ public class GameInfo {
     public static final int gridSize=280;
     private static final int squareSize=90;
 
+    public static final int SECTOR_UNRESTRICTED = -1;
+    private static int currentSector = SECTOR_UNRESTRICTED;
+
+    private static EndGameStatus status = null;
+
     static Board gameBoard;
 
     private static PlayerType currentPlayer;
@@ -27,9 +32,6 @@ public class GameInfo {
     public static PlayerType getCurrentPlayer() {
         return currentPlayer;
     }
-
-    public static final int SECTOR_UNRESTRICTED = -1;
-    private static int currentSector = SECTOR_UNRESTRICTED;
 
     public static int getCurrentSector() {
         return currentSector;
@@ -48,5 +50,15 @@ public class GameInfo {
     static public int getSquareSize()
     {
         return squareSize;
+    }
+
+    public static EndGameStatus getStatus()
+    {
+        return status;
+    }
+
+    public static void setStatus( EndGameStatus _status)
+    {
+        status = _status;
     }
 }

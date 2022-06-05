@@ -60,7 +60,7 @@
                         <!-- Default configuration for running with: mvn clean javafx:run -->
                         <id>default-cli</id>
                         <configuration>
-                            <mainClass>game.tictactoe.pio_tictactoe/game.tictactoe.pio_tictactoe.HelloApplication
+                            <mainClass>game.tictactoe.pio_tictactoe/game.tictactoe.pio_tictactoe.TicTacToeApplication
                             </mainClass>
                             <launcher>app</launcher>
                             <jlinkZipName>app</jlinkZipName>
