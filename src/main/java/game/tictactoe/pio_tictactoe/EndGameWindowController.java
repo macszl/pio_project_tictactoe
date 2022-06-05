@@ -14,8 +14,10 @@ class EndGameWindowController implements Initializable
 	Text victory_text;
 
 	@Override
-	public void initialize(URL url, ResourceBundle resourceBundle) {
-		if( GameInfo.getStatus() == null)
+	public
+	void initialize (URL url, ResourceBundle resourceBundle)
+	{
+		if( GameInfo.getStatus() == null )
 		{
 			victory_text.setText("Nikt nie zwyciężył.");
 		}
@@ -26,6 +28,10 @@ class EndGameWindowController implements Initializable
 		else if( GameInfo.getStatus() == EndGameStatus.CROSS_WIN )
 		{
 			victory_text.setText("Wygrana krzyżyka.");
+		}
+		else
+		{
+			victory_text.setText("Nikt nie zwyciężył.");
 		}
 	}
 }
