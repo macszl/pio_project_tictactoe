@@ -48,8 +48,6 @@ public class Square extends StackPane{
         this.resize(GameInfo.getSquareSize(),GameInfo.getSquareSize());
         this.setLayoutX(2+GameInfo.getSquareSize()*x);
         this.setLayoutY(y*GameInfo.getSquareSize()+1);
-        if(boardGrid != null)
-            this.nextGrid = new ImagePattern(new Image(new File("color.png").toURI().toString()));
         this.setOnMouseClicked(new EventHandler<>()
         {
             @Override
@@ -82,7 +80,7 @@ public class Square extends StackPane{
     {
         if ( this.getChildren().size() == 2)
         {
-            if(this.getChildren().get(1).getClass() == Circle.class)
+            if(this.getChildren().get(1).getClass() == CustomCircle.class)
                 return true;
         }
         return false;
@@ -103,8 +101,8 @@ public class Square extends StackPane{
 
     public boolean isAllowedToPlace()
     {
-        if( GameInfo.getCurrentSector() == GameInfo.SECTOR_UNRESTRICTED ||
-            parent.y * 3 + parent.x == GameInfo.getCurrentSector() && !parent.getWinner())
+        if(( GameInfo.getCurrentSector() == GameInfo.SECTOR_UNRESTRICTED && !parent.getWinner())||
+           (parent.y * 3 + parent.x == GameInfo.getCurrentSector() && !parent.getWinner()))
         {
             return true;
         }
