@@ -7,10 +7,10 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class HelloApplication extends Application {
+public class TicTacToeApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("mainGrid.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(TicTacToeApplication.class.getResource("mainGrid.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 840, 840);
         stage.setTitle("TicTacToe");
         stage.setScene(scene);

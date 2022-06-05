@@ -96,8 +96,8 @@ public class Square extends StackPane{
 
     public boolean isAllowedToPlace()
     {
-        if( GameInfo.getCurrentSector() == GameInfo.SECTOR_UNRESTRICTED ||
-            parent.getY() * 3 + parent.getX() == GameInfo.getCurrentSector() && !parent.getWinner())
+        if(( GameInfo.getCurrentSector() == GameInfo.SECTOR_UNRESTRICTED && !parent.getWinner())||
+           (parent.y * 3 + parent.x == GameInfo.getCurrentSector() && !parent.getWinner()))
         {
             return true;
         }
