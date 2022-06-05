@@ -7,10 +7,23 @@ import java.util.Vector;
 public class Grid  extends AnchorPane {
 
     Vector<Square> squares = new Vector<>();
-    int x, y;
+
+    private int x, y;
+
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
     public Board parent;
 
     private boolean winner;
+    private final CustomCircle circle = new CustomCircle(GameInfo.BIG_CIRCLE_COORDINATES,GameInfo.BIG_CIRCLE_COORDINATES,GameInfo.BIG_CIRCLE_RADIUS ,GameInfo.BIG_CIRCLE_WIDTH);
+    private final Cross cross = new Cross(GameInfo.BIG_CROSS_WIDTH,GameInfo.BIG_CROSS_SIZE,GameInfo.BIG_CROSS_SIZE,GameInfo.BIG_CROSS_COORDINATES,GameInfo.BIG_CROSS_COORDINATES);
+
     private PlayerType playerType = null;
 
     public Grid(int boardColumn, int boardRow,Board _parent,AnchorPane boardGrid)
@@ -22,7 +35,6 @@ public class Grid  extends AnchorPane {
         this.setLayoutX(GameInfo.gridSize*boardColumn);
         this.setLayoutY(GameInfo.gridSize*boardRow);
         this.winner = false;
-
         for(int gridRow=0;gridRow<3;gridRow++)
         {
             for(int gridColumn=0;gridColumn<3;gridColumn++)
@@ -78,6 +90,12 @@ public class Grid  extends AnchorPane {
 
         if( (squares.get(row * 3).checkCross()  && squares.get(row * 3 + 1).checkCross()  && squares.get(row * 3 + 2).checkCross() ))
         {
+            if(GameInfo.getCurrentPlayer() == PlayerType.Cross){
+                this.getChildren().add(cross);
+            }
+            if(GameInfo.getCurrentPlayer() == PlayerType.Circle){
+                this.getChildren().add(circle);
+            }
             this.winner = true;
             this.playerType = PlayerType.Cross;
         }
@@ -96,6 +114,12 @@ public class Grid  extends AnchorPane {
 
         if( (squares.get(col).checkCross()  && squares.get(col + 3).checkCross()  && squares.get(col + 6).checkCross() ))
         {
+            if(GameInfo.getCurrentPlayer() == PlayerType.Cross){
+                this.getChildren().add(cross);
+            }
+            if(GameInfo.getCurrentPlayer() == PlayerType.Circle){
+                this.getChildren().add(circle);
+            }
             this.winner = true;
             this.playerType = PlayerType.Cross;
         }
@@ -118,6 +142,12 @@ public class Grid  extends AnchorPane {
         }
         else if( (squares.get(0).checkCircle() && squares.get(4).checkCircle() && squares.get(8).checkCircle() ))
         {
+            if(GameInfo.getCurrentPlayer() == PlayerType.Circle){
+                this.getChildren().add(circle);
+            }
+            if(GameInfo.getCurrentPlayer() == PlayerType.Cross){
+                this.getChildren().add(cross);
+            }
             this.winner = true;
             this.playerType = PlayerType.Circle;
         }
@@ -129,6 +159,12 @@ public class Grid  extends AnchorPane {
 
         if( (squares.get(2).checkCross()  && squares.get(4).checkCross()  && squares.get(6).checkCross() ))
         {
+            if(GameInfo.getCurrentPlayer() == PlayerType.Circle){
+                this.getChildren().add(circle);
+            }
+            if(GameInfo.getCurrentPlayer() == PlayerType.Cross){
+                this.getChildren().add(cross);
+            }
             this.winner = true;
             this.playerType = PlayerType.Cross;
         }

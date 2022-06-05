@@ -3,31 +3,26 @@ package game.tictactoe.pio_tictactoe;
 import javafx.event.EventHandler;
 import javafx.scene.ImageCursor;
 import javafx.scene.SnapshotParameters;
-import javafx.scene.image.Image;
 import javafx.scene.image.WritableImage;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.ImagePattern;
 import javafx.scene.paint.Paint;
-import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
-
-import java.io.File;
 
 public class Square extends StackPane{
     
-    CustomCircle circle = new CustomCircle(GameInfo.CIRCLE_CENTER,GameInfo.CIRCLE_CENTER,GameInfo.CIRCLE_RADIUS,GameInfo.CIRCLE_WIDTH);
-    Cross cross = new Cross(GameInfo.CROSS_WIDTH, GameInfo.CROSS_SIZE, GameInfo.CROSS_SIZE);
-    Cross crossCursor = new Cross(GameInfo.CROSS_CURSOR_WIDTH,GameInfo.CROSS_CURSOR_SIZE,GameInfo.CROSS_CURSOR_SIZE);
-    CustomCircle circleCursor = new CustomCircle(GameInfo.CIRCLE_CURSOR_CENTER,GameInfo.CIRCLE_CURSOR_CENTER,GameInfo.CIRCLE_CURSOR_RADIUS,GameInfo.CIRCLE_CURSOR_WIDTH);
+    private final CustomCircle circle = new CustomCircle(GameInfo.CIRCLE_CENTER,GameInfo.CIRCLE_CENTER,GameInfo.CIRCLE_RADIUS,GameInfo.CIRCLE_WIDTH);
+    private final Cross cross = new Cross(GameInfo.CROSS_WIDTH, GameInfo.CROSS_SIZE, GameInfo.CROSS_SIZE);
+    private final Cross crossCursor = new Cross(GameInfo.CROSS_CURSOR_WIDTH,GameInfo.CROSS_CURSOR_SIZE,GameInfo.CROSS_CURSOR_SIZE);
+    private final CustomCircle circleCursor = new CustomCircle(GameInfo.CIRCLE_CURSOR_CENTER,GameInfo.CIRCLE_CURSOR_CENTER,GameInfo.CIRCLE_CURSOR_RADIUS,GameInfo.CIRCLE_CURSOR_WIDTH);
 
     boolean empty=true;
     private final AnchorPane boardGrid;
 
     Grid parent;
-    int x, y;
+    private int x, y;
     private final Rectangle rectangle;
 
     private Rectangle createRectangle()
@@ -113,7 +108,7 @@ public class Square extends StackPane{
 
     public void paintSquare()
     {
-        this.rectangle.setFill(Paint.valueOf("cdffa6"));
+        this.rectangle.setFill(Paint.valueOf(GameInfo.FILL_COLOR));
     }
     public void unpaintSquare()
     {
