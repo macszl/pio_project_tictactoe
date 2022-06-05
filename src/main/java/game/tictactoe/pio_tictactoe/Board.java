@@ -99,6 +99,7 @@ public class Board {
         {
             try
             {
+                GameInfo.setStatus(winStatus);
                 winHandler.switchToEndGameWindow(winStatus);
             }
             catch (Exception e)
