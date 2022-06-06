@@ -168,4 +168,16 @@ class Square extends StackPane
 			GameInfo.gameBoard.paintSquares();
 		}
 	}
+
+	public
+	CustomCircle getCircle ()
+	{
+		return circle;
+	}
+
+	public
+	Cross getCross ()
+	{
+		return cross;
+	}
 }
