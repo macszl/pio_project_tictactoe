@@ -1,6 +1,7 @@
 package game.tictactoe.pio_tictactoe;
 
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.StackPane;
 
 import java.util.Vector;
 
@@ -19,6 +20,20 @@ class Grid extends AnchorPane
 	Vector<Square> squares = new Vector<>();
 	private boolean winner;
 	private PlayerType playerType = null;
+
+	public final int ROW_LENGTH = 3;
+	public final int COLUMN_LENGTH = 3;
+
+	public final int UPPER_LEFT = 0;
+	public final int UPPER_MID = 1;
+	public final int UPPER_RIGHT = 2;
+	public final int MIDDLE_LEFT = 3;
+	public final int MIDDLE_MIDDLE = 4;
+	public final int MIDDLE_RIGHT = 5;
+	public final int LOWER_LEFT = 6;
+	public final int LOWER_MIDDLE = 7;
+	public final int LOWER_RIGHT = 8;
+
 	public
 	Grid (int boardColumn, int boardRow, Board _parent, AnchorPane boardGrid)
 	{
@@ -29,9 +44,9 @@ class Grid extends AnchorPane
 		this.setLayoutX(GameInfo.getGridSize() * boardColumn);
 		this.setLayoutY(GameInfo.getGridSize() * boardRow);
 		this.winner = false;
-		for (int gridRow = 0; gridRow < 3; gridRow++)
+		for (int gridRow = 0; gridRow < COLUMN_LENGTH; gridRow++)
 		{
-			for (int gridColumn = 0; gridColumn < 3; gridColumn++)
+			for (int gridColumn = 0; gridColumn < ROW_LENGTH; gridColumn++)
 			{
 				Square square = new Square(boardGrid, gridColumn, gridRow);
 				this.getChildren().add(square);
@@ -81,11 +96,11 @@ class Grid extends AnchorPane
             return;
         }
 
-        for (int i = 0; i < 3; i++)
+        for (int i = 0; i < ROW_LENGTH; i++)
         {
             this.checkColumn(i);
         }
-        for (int i = 0; i < 3; i++)
+        for (int i = 0; i < COLUMN_LENGTH; i++)
         {
             this.checkRow(i);
         }
@@ -102,15 +117,17 @@ class Grid extends AnchorPane
             return;
         }
 
-		if( (squares.get(row * 3).checkCross() && squares.get(row * 3 + 1).checkCross() && squares.get(row * 3 + 2)
-																								  .checkCross()) )
+		if(    (squares.get(row * ROW_LENGTH).checkCross()
+			 && squares.get(row * ROW_LENGTH + 1).checkCross()
+			 && squares.get(row * ROW_LENGTH + 2).checkCross()) )
 		{
 			this.getChildren().add(cross);
 			this.winner = true;
 			this.playerType = PlayerType.Cross;
 		}
-		else if( (squares.get(row * 3).checkCircle() && squares.get(row * 3 + 1).checkCircle() && squares.get(
-				row * 3 + 2).checkCircle()) )
+		else if( (squares.get(row * ROW_LENGTH).checkCircle()
+				  && squares.get(row * ROW_LENGTH + 1).checkCircle()
+				  && squares.get(row * ROW_LENGTH + 2).checkCircle()) )
 		{
 			this.getChildren().add(circle);
 			this.winner = true;
@@ -126,14 +143,15 @@ class Grid extends AnchorPane
             return;
         }
 
-		if( (squares.get(col).checkCross() && squares.get(col + 3).checkCross() && squares.get(col + 6).checkCross()) )
+		if( (squares.get(col).checkCross() && squares.get(col + ROW_LENGTH).checkCross()
+			 && squares.get(col + ROW_LENGTH * 2).checkCross()) )
 		{
 			this.getChildren().add(cross);
 			this.winner = true;
 			this.playerType = PlayerType.Cross;
 		}
-		else if( (squares.get(col).checkCircle() && squares.get(col + 3).checkCircle() && squares.get(col + 6)
-																								 .checkCircle()) )
+		else if( (squares.get(col).checkCircle() && squares.get(col + ROW_LENGTH).checkCircle()
+				  && squares.get(col + ROW_LENGTH * 2).checkCircle()) )
 		{
 			this.getChildren().add(circle);
 			this.winner = true;
@@ -148,13 +166,13 @@ class Grid extends AnchorPane
             return;
         }
 
-		if( (squares.get(0).checkCross() && squares.get(4).checkCross() && squares.get(8).checkCross()) )
+		if( (squares.get(UPPER_LEFT).checkCross() && squares.get(MIDDLE_MIDDLE).checkCross() && squares.get(LOWER_RIGHT).checkCross()) )
 		{
 			this.getChildren().add(cross);
 			this.winner = true;
 			this.playerType = PlayerType.Cross;
 		}
-		else if( (squares.get(0).checkCircle() && squares.get(4).checkCircle() && squares.get(8).checkCircle()) )
+		else if( (squares.get(UPPER_LEFT).checkCircle() && squares.get(MIDDLE_MIDDLE).checkCircle() && squares.get(LOWER_RIGHT).checkCircle()) )
 		{
 			this.getChildren().add(circle);
 			this.winner = true;
@@ -165,17 +183,17 @@ class Grid extends AnchorPane
 	void checkRightUpDiagonal ()
 	{
         if( winner )
-        {
-            return;
-        }
+		{
+			return;
+		}
 
-		if( (squares.get(2).checkCross() && squares.get(4).checkCross() && squares.get(6).checkCross()) )
+		if( (squares.get(UPPER_RIGHT).checkCross() && squares.get(MIDDLE_MIDDLE).checkCross() && squares.get(LOWER_LEFT).checkCross()) )
 		{
 			this.getChildren().add(cross);
 			this.winner = true;
 			this.playerType = PlayerType.Cross;
 		}
-		else if( (squares.get(2).checkCircle() && squares.get(4).checkCircle() && squares.get(6).checkCircle()) )
+		else if( (squares.get(UPPER_RIGHT).checkCircle() && squares.get(MIDDLE_MIDDLE).checkCircle() && squares.get(LOWER_LEFT).checkCircle()) )
 		{
 			this.getChildren().add(circle);
 			this.winner = true;
@@ -188,7 +206,7 @@ class Grid extends AnchorPane
 		if(winner)
 			return true;
 
-		for (int i = 0; i < 9; i++)
+		for (int i = 0; i < ROW_LENGTH * COLUMN_LENGTH; i++)
 		{
             if( squares.get(i).empty )
             {

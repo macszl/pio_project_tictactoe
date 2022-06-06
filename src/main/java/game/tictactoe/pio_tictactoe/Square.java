@@ -154,8 +154,8 @@ class Square extends StackPane
 				changeCursor();
 			}
 
-			if( !parent.parent.getGrid(y * 3 + x).isWinner()
-			 && !parent.parent.getGrid(y * 3 + x)  .isFull())
+			if( !GameInfo.gameBoard.getGrid(y * 3 + x).isWinner()
+			 && !GameInfo.gameBoard.getGrid(y * 3 + x)  .isFull())
 			{
 				GameInfo.setCurrentSector(y * 3 + x);
 			}

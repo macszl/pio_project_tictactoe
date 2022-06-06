@@ -19,6 +19,8 @@ public
 class Board
 {
 
+	public static final int ROW_LENGTH = 3;
+	public static final int COLUMN_LENGTH = 3;
 	private final WinHandler winHandler;
 	public Vector<Grid> grids = new Vector<>();
 	CustomCircle circleCursor = new CustomCircle(GameInfo.CIRCLE_CURSOR_CENTER, GameInfo.CIRCLE_CURSOR_CENTER,
@@ -26,14 +28,24 @@ class Board
 	CursorMode cursorMode;
 	private EndGameStatus winStatus = null;
 
+	public final int UPPER_LEFT = 0;
+	public final int UPPER_MID = 1;
+	public final int UPPER_RIGHT = 2;
+	public final int MIDDLE_LEFT = 3;
+	public final int MIDDLE_MIDDLE = 4;
+	public final int MIDDLE_RIGHT = 5;
+	public final int LOWER_LEFT = 6;
+	public final int LOWER_MIDDLE = 7;
+	public final int LOWER_RIGHT = 8;
+
 	public
 	Board (AnchorPane boardGrid, CursorMode _cursorMode)
 	{
 		cursorMode = _cursorMode;
 		winHandler = new WinHandler(boardGrid);
-		for (int BoardRow = 0; BoardRow < 3; BoardRow++)
+		for (int BoardRow = 0; BoardRow < COLUMN_LENGTH; BoardRow++)
 		{
-			for (int BoardColumn = 0; BoardColumn < 3; BoardColumn++)
+			for (int BoardColumn = 0; BoardColumn < ROW_LENGTH; BoardColumn++)
 			{
 				Grid grid = new Grid(BoardColumn, BoardRow, this, boardGrid);
 				grids.add(grid);
@@ -96,11 +108,11 @@ class Board
 	public
 	void checkWinStatus ()
 	{
-        for (int i = 0; i < 3; i++)
+        for (int i = 0; i < ROW_LENGTH; i++)
         {
             this.checkColumn(i);
         }
-        for (int i = 0; i < 3; i++)
+        for (int i = 0; i < COLUMN_LENGTH; i++)
         {
             this.checkRow(i);
         }
@@ -129,13 +141,15 @@ class Board
             return;
         }
 
-		if( (grids.get(row * 3).checkCross() && grids.get(row * 3 + 1).checkCross() && grids.get(row * 3 + 2)
-																							.checkCross()) )
+		if( (grids.get(row * ROW_LENGTH).checkCross()
+			 && grids.get(row * ROW_LENGTH + 1).checkCross()
+			 && grids.get(row * ROW_LENGTH + 2).checkCross()) )
 		{
 			this.winStatus = EndGameStatus.CROSS_WIN;
 		}
-		else if( (grids.get(row * 3).checkCircle() && grids.get(row * 3 + 1).checkCircle() && grids.get(row * 3 + 2)
-																								   .checkCircle()) )
+		else if( (grids.get(row * ROW_LENGTH).checkCircle()
+				  && grids.get(row * ROW_LENGTH + 1).checkCircle()
+				  && grids.get(row * ROW_LENGTH + 2).checkCircle()) )
 		{
 			this.winStatus = EndGameStatus.CIRCLE_WIN;
 		}
@@ -149,12 +163,13 @@ class Board
             return;
         }
 
-		if( (grids.get(col).checkCross() && grids.get(col + 3).checkCross() && grids.get(col + 6).checkCross()) )
+		if( (grids.get(col).checkCross() && grids.get(col + ROW_LENGTH).checkCross()
+			 && grids.get(col + ROW_LENGTH * 2).checkCross()) )
 		{
 			this.winStatus = EndGameStatus.CROSS_WIN;
 		}
-		else if( (grids.get(col).checkCircle() && grids.get(col + 3).checkCircle() && grids.get(col + 6)
-																						   .checkCircle()) )
+		else if( (grids.get(col).checkCircle() && grids.get(col + ROW_LENGTH).checkCircle()
+				  && grids.get(col + ROW_LENGTH * 2).checkCircle()) )
 		{
 			this.winStatus = EndGameStatus.CIRCLE_WIN;
 		}
@@ -167,11 +182,11 @@ class Board
             return;
         }
 
-		if( (grids.get(0).checkCross() && grids.get(4).checkCross() && grids.get(8).checkCross()) )
+		if( (grids.get(UPPER_LEFT).checkCross() && grids.get(MIDDLE_MIDDLE).checkCross() && grids.get(LOWER_RIGHT).checkCross()) )
 		{
 			this.winStatus = EndGameStatus.CROSS_WIN;
 		}
-		else if( (grids.get(0).checkCircle() && grids.get(4).checkCircle() && grids.get(8).checkCircle()) )
+		else if( (grids.get(UPPER_LEFT).checkCircle() && grids.get(MIDDLE_MIDDLE).checkCircle() && grids.get(LOWER_RIGHT).checkCircle()) )
 		{
 			this.winStatus = EndGameStatus.CIRCLE_WIN;
 		}
@@ -184,11 +199,11 @@ class Board
             return;
         }
 
-		if( (grids.get(2).checkCross() && grids.get(4).checkCross() && grids.get(6).checkCross()) )
+		if( (grids.get(UPPER_RIGHT).checkCross() && grids.get(MIDDLE_MIDDLE).checkCross() && grids.get(LOWER_LEFT).checkCross()) )
 		{
 			this.winStatus = EndGameStatus.CROSS_WIN;
 		}
-		else if( (grids.get(2).checkCircle() && grids.get(4).checkCircle() && grids.get(6).checkCircle()) )
+		else if( (grids.get(UPPER_RIGHT).checkCircle() && grids.get(MIDDLE_MIDDLE).checkCircle() && grids.get(LOWER_LEFT).checkCircle()) )
 		{
 			this.winStatus = EndGameStatus.CIRCLE_WIN;
 		}
@@ -201,7 +216,7 @@ class Board
             return;
         }
 
-		for (int i = 0; i < 9; i++)
+		for (int i = 0; i < ROW_LENGTH * COLUMN_LENGTH; i++)
 		{
 			if( !grids.get(i).isFull() )
 				return;

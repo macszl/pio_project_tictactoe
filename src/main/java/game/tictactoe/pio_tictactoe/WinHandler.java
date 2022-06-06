@@ -23,7 +23,7 @@ class WinHandler
 	{
 		Stage stage = (Stage) boardGrid.getScene().getWindow();
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("endGame.fxml"));
-		Scene scene = new Scene(fxmlLoader.load(), 270, 270);
+		Scene scene = new Scene(fxmlLoader.load(), GameInfo.getGridSize(), GameInfo.getGridSize());
 		stage.setScene(scene);
 		stage.show();
 	}
