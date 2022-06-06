@@ -37,7 +37,6 @@ class Grid extends AnchorPane
 				this.getChildren().add(square);
 				this.squares.add(square);
 				square.parent = this;
-
 			}
 		}
 	}

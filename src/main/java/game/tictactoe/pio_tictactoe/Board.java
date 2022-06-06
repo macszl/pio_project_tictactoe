@@ -19,7 +19,6 @@ public
 class Board
 {
 
-
 	private final WinHandler winHandler;
 	public Vector<Grid> grids = new Vector<>();
 	CustomCircle circleCursor = new CustomCircle(GameInfo.CIRCLE_CURSOR_CENTER, GameInfo.CIRCLE_CURSOR_CENTER,

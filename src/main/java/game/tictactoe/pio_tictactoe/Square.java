@@ -139,25 +139,19 @@ class Square extends StackPane
 			if( GameInfo.getCurrentPlayer() == PlayerType.Circle )
 			{
 				setCircle();
-				parent.checkWinCondition();
-				empty = false;
 				GameInfo.setCurrentPlayer(PlayerType.Cross);
-                if( this.parent.parent.cursorMode == Board.CursorMode.SHAPE_CURSOR )
-                {
-                    changeCursor();
-                }
-
 			}
 			else
 			{
 				setCross();
-				parent.checkWinCondition();
-				empty = false;
 				GameInfo.setCurrentPlayer(PlayerType.Circle);
-                if( this.parent.parent.cursorMode == Board.CursorMode.SHAPE_CURSOR )
-                {
-                    changeCursor();
-                }
+			}
+
+			empty = false;
+			parent.checkWinCondition();
+			if( this.parent.parent.cursorMode == Board.CursorMode.SHAPE_CURSOR )
+			{
+				changeCursor();
 			}
 
 			if( !parent.parent.getGrid(y * 3 + x).isWinner()
