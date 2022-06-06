@@ -4,5 +4,5 @@ public
 enum PlayerType
 {
 	Cross,
-	Circle
+	Circle,
 }

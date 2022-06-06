@@ -5,6 +5,18 @@ import org.junit.jupiter.api.Test;
 
 class SquareTest
 {
+	public final int UPPER_LEFT = 0;
+	public final int UPPER_MID = 1;
+	public final int UPPER_RIGHT = 2;
+	public final int MIDDLE_LEFT = 3;
+	public final int MIDDLE_MIDDLE = 4;
+	public final int MIDDLE_RIGHT = 5;
+	public final int LOWER_LEFT = 6;
+	public final int LOWER_MIDDLE = 7;
+	public final int LOWER_RIGHT = 8;
+
+	public static final int ROW_LENGTH = 3;
+	public static final int COLUMN_LENGTH = 3;
 
 	@Test
 	public
@@ -14,19 +26,19 @@ class SquareTest
 		//dobranie sie do listy sektorow, i do listy kwadratow
 
 		//ustawiamy pole poczatkowe
-		board.grids.get(4).squares.get(4).onMouseClickEvent();
+		board.grids.get(MIDDLE_MIDDLE).squares.get(MIDDLE_MIDDLE).onMouseClickEvent();
 
-		int square_obj_idx = board.grids.get(4).squares.get(4).getChildren().size() - 1;
-		Assertions.assertSame(board.grids.get(4).squares.get(4).getChildren().get(square_obj_idx),
-							  board.grids.get(4).squares.get(4).circle,
+		int square_obj_idx = board.grids.get(MIDDLE_MIDDLE).squares.get(MIDDLE_MIDDLE).getChildren().size() - 1;
+		Assertions.assertSame(board.grids.get(MIDDLE_MIDDLE).squares.get(MIDDLE_MIDDLE).getChildren().get(square_obj_idx),
+							  board.grids.get(MIDDLE_MIDDLE).squares.get(MIDDLE_MIDDLE).getCircle(),
 							  "Actual object differs from expected object.");
 
 		//wywolujemy onMouseClickEvent w jednym polu 1000 razy
 		for (int i = 0; i < 1000; i++)
 		{
-			board.grids.get(4).squares.get(4).onMouseClickEvent();
-			Assertions.assertSame(board.grids.get(4).squares.get(4).getChildren().get(square_obj_idx),
-								  board.grids.get(4).squares.get(4).circle,
+			board.grids.get(MIDDLE_MIDDLE).squares.get(MIDDLE_MIDDLE).onMouseClickEvent();
+			Assertions.assertSame(board.grids.get(MIDDLE_MIDDLE).squares.get(MIDDLE_MIDDLE).getChildren().get(square_obj_idx),
+								  board.grids.get(MIDDLE_MIDDLE).squares.get(MIDDLE_MIDDLE).getCircle(),
 								  "Actual object differs from expected object");
 		}
 
@@ -37,12 +49,12 @@ class SquareTest
 	void massTestUserTryingToPlaceFigureInIncorrectPlaces ()
 	{
 
-		for (int sectorFirstClickBoardLoc = 0; sectorFirstClickBoardLoc < 9; sectorFirstClickBoardLoc++)
+		for (int sectorFirstClickBoardLoc = 0; sectorFirstClickBoardLoc < ROW_LENGTH * COLUMN_LENGTH; sectorFirstClickBoardLoc++)
 		{
 
-			for (int gridRow = 0; gridRow < 3; gridRow++)
+			for (int gridRow = 0; gridRow < ROW_LENGTH; gridRow++)
 			{
-				for (int gridColumn = 0; gridColumn < 3; gridColumn++)
+				for (int gridColumn = 0; gridColumn < COLUMN_LENGTH; gridColumn++)
 				{
                     //deklaracja boarda
 
@@ -51,12 +63,12 @@ class SquareTest
 
 					//ustawienie pierwszej figury w danym sektorze
 					board.grids.get(sectorFirstClickBoardLoc)
-                         .squares.get(gridRow * 3 + gridColumn)
+                         .squares.get(gridRow * ROW_LENGTH + gridColumn)
   						 .onMouseClickEvent();
 
 					//wywolanie metody testowej sprawdzajacej czy mouseeventy przejda, badz nie
 					TestUserTryingToPlaceFigureInIncorrectPlaces
-                    (board, gridRow * 3 + gridColumn, sectorFirstClickBoardLoc);
+                    (board, gridRow * ROW_LENGTH + gridColumn, sectorFirstClickBoardLoc);
 
 				}
 			}
@@ -72,33 +84,33 @@ class SquareTest
 		//wywolujemy onMouseClickEvent w polach ktore sa niepoprawne dla tej figury
 
 
-		for (int gridRow = 0; gridRow < 3; gridRow++)
+		for (int gridRow = 0; gridRow < ROW_LENGTH; gridRow++)
 		{
-			for (int gridColumn = 0; gridColumn < 3; gridColumn++)
+			for (int gridColumn = 0; gridColumn < COLUMN_LENGTH; gridColumn++)
 			{
 				//skipping the checks of the correct sector
-				if( gridRow * 3 + gridColumn == nextMoveSectorXY )
+				if( gridRow * ROW_LENGTH + gridColumn == nextMoveSectorXY )
 				{
 					continue;
 				}
 
-				for (int squareRow = 0; squareRow < 3; squareRow++)
+				for (int squareRow = 0; squareRow < ROW_LENGTH; squareRow++)
 				{
-					for (int squareColumn = 0; squareColumn < 3; squareColumn++)
+					for (int squareColumn = 0; squareColumn < COLUMN_LENGTH; squareColumn++)
 					{
                         //skipping the checks of the first square placed
-                        if( squareRow * 3 + squareColumn == nextMoveSectorXY &&
-                            gridRow * 3 + gridColumn == firstSquareLocBoardXY )
+                        if( squareRow * ROW_LENGTH + squareColumn == nextMoveSectorXY &&
+                            gridRow * ROW_LENGTH + gridColumn == firstSquareLocBoardXY )
                         {
                             continue;
                         }
 
-						board.grids.get(gridRow * 3 + gridColumn)
-                             .squares.get(squareRow * 3 + squareColumn)
+						board.grids.get(gridRow * ROW_LENGTH + gridColumn)
+                             .squares.get(squareRow * ROW_LENGTH + squareColumn)
                              .onMouseClickEvent();
 
-						int amountOfObjectsOnSquare = board.grids.get(gridRow * 3 + gridColumn)
-                                                           .squares.get(squareRow * 3 + squareColumn)
+						int amountOfObjectsOnSquare = board.grids.get(gridRow * ROW_LENGTH + gridColumn)
+                                                           .squares.get(squareRow * ROW_LENGTH + squareColumn)
                                                            .getChildren().size();
 
 						Assertions.assertSame(1, amountOfObjectsOnSquare);
