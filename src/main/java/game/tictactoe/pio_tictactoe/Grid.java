@@ -98,106 +98,88 @@ class Grid extends AnchorPane
 
         for (int i = 0; i < ROW_LENGTH; i++)
         {
-            this.checkColumn(i);
+            this.checkColumn(i,PlayerType.Cross, cross);
+			this.checkColumn(i, PlayerType.Circle, circle);
         }
         for (int i = 0; i < COLUMN_LENGTH; i++)
         {
-            this.checkRow(i);
+            this.checkRow(i, PlayerType.Cross, cross);
+			this.checkRow(i, PlayerType.Circle, circle);
         }
-		this.checkLeftUpDiagonal();
-		this.checkRightUpDiagonal();
+
+		this.checkLeftUpDiagonal(PlayerType.Cross, cross);
+		this.checkLeftUpDiagonal(PlayerType.Circle, circle);
+		this.checkRightUpDiagonal(PlayerType.Cross, cross);
+		this.checkRightUpDiagonal(PlayerType.Circle, circle);
 
 		parent.checkWinStatus();
 	}
 
-	void checkRow (int row)
+	void checkRow (int row, PlayerType type, StackPane obj)
 	{
         if( winner )
         {
             return;
         }
 
-		if(    (squares.get(row * ROW_LENGTH).checkCross()
-			 && squares.get(row * ROW_LENGTH + 1).checkCross()
-			 && squares.get(row * ROW_LENGTH + 2).checkCross()) )
+		if(    (squares.get(row * ROW_LENGTH).checkPlayerType(type)
+			 && squares.get(row * ROW_LENGTH + 1).checkPlayerType(type)
+			 && squares.get(row * ROW_LENGTH + 2).checkPlayerType(type)) )
 		{
-			this.getChildren().add(cross);
+			this.getChildren().add(obj);
 			this.winner = true;
-			this.playerType = PlayerType.Cross;
-		}
-		else if( (squares.get(row * ROW_LENGTH).checkCircle()
-				  && squares.get(row * ROW_LENGTH + 1).checkCircle()
-				  && squares.get(row * ROW_LENGTH + 2).checkCircle()) )
-		{
-			this.getChildren().add(circle);
-			this.winner = true;
-			this.playerType = PlayerType.Circle;
+			this.playerType = type;
 		}
 
 	}
 
-	void checkColumn (int col)
+	void checkColumn (int col, PlayerType type, StackPane obj)
 	{
         if( winner )
         {
             return;
         }
 
-		if( (squares.get(col).checkCross() && squares.get(col + ROW_LENGTH).checkCross()
-			 && squares.get(col + ROW_LENGTH * 2).checkCross()) )
+		if( (squares.get(col).checkPlayerType(type) && squares.get(col + ROW_LENGTH).checkPlayerType(type)
+			 && squares.get(col + ROW_LENGTH * 2).checkPlayerType(type)) )
 		{
-			this.getChildren().add(cross);
+			this.getChildren().add(obj);
 			this.winner = true;
-			this.playerType = PlayerType.Cross;
-		}
-		else if( (squares.get(col).checkCircle() && squares.get(col + ROW_LENGTH).checkCircle()
-				  && squares.get(col + ROW_LENGTH * 2).checkCircle()) )
-		{
-			this.getChildren().add(circle);
-			this.winner = true;
-			this.playerType = PlayerType.Circle;
+			this.playerType = type;
 		}
 	}
 
-	void checkLeftUpDiagonal ()
+	void checkLeftUpDiagonal (PlayerType type, StackPane obj)
 	{
         if( winner )
         {
             return;
         }
 
-		if( (squares.get(UPPER_LEFT).checkCross() && squares.get(MIDDLE_MIDDLE).checkCross() && squares.get(LOWER_RIGHT).checkCross()) )
+		if( (squares.get(UPPER_LEFT).checkPlayerType(type) &&
+			 squares.get(MIDDLE_MIDDLE).checkPlayerType(type) &&
+			 squares.get(LOWER_RIGHT).checkPlayerType(type)) )
 		{
-			this.getChildren().add(cross);
+			this.getChildren().add(obj);
 			this.winner = true;
-			this.playerType = PlayerType.Cross;
-		}
-		else if( (squares.get(UPPER_LEFT).checkCircle() && squares.get(MIDDLE_MIDDLE).checkCircle() && squares.get(LOWER_RIGHT).checkCircle()) )
-		{
-			this.getChildren().add(circle);
-			this.winner = true;
-			this.playerType = PlayerType.Circle;
+			this.playerType = type;
 		}
 	}
 
-	void checkRightUpDiagonal ()
+	void checkRightUpDiagonal (PlayerType type, StackPane obj)
 	{
         if( winner )
 		{
 			return;
 		}
 
-		if( (squares.get(UPPER_RIGHT).checkCross() && squares.get(MIDDLE_MIDDLE).checkCross() && squares.get(LOWER_LEFT).checkCross()) )
+		if( (squares.get(UPPER_RIGHT).checkPlayerType(type) &&
+			 squares.get(MIDDLE_MIDDLE).checkPlayerType(type) &&
+			 squares.get(LOWER_LEFT).checkPlayerType(type)) )
 		{
-			this.getChildren().add(cross);
+			this.getChildren().add(obj);
 			this.winner = true;
-			this.playerType = PlayerType.Cross;
-		}
-		else if( (squares.get(UPPER_RIGHT).checkCircle() && squares.get(MIDDLE_MIDDLE).checkCircle() && squares.get(LOWER_LEFT).checkCircle()) )
-		{
-			this.getChildren().add(circle);
-			this.winner = true;
-			this.playerType = PlayerType.Circle;
+			this.playerType = type;
 		}
 	}
 
@@ -224,6 +206,17 @@ class Grid extends AnchorPane
 	boolean checkCircle ()
 	{
 		return this.winner && this.playerType == PlayerType.Circle;
+	}
+
+	boolean checkPlayerType(PlayerType type)
+	{
+		if( type == PlayerType.Circle)
+		{
+			return checkCircle();
+		}
+		else {
+			return checkCross();
+		}
 	}
 
 }
