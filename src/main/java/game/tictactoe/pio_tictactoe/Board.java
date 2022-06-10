@@ -21,13 +21,6 @@ class Board
 
 	public static final int ROW_LENGTH = 3;
 	public static final int COLUMN_LENGTH = 3;
-	private final WinHandler winHandler;
-	public Vector<Grid> grids = new Vector<>();
-	CustomCircle circleCursor = new CustomCircle(GameInfo.CIRCLE_CURSOR_CENTER, GameInfo.CIRCLE_CURSOR_CENTER,
-												 GameInfo.CIRCLE_CURSOR_RADIUS, GameInfo.CIRCLE_CURSOR_WIDTH);
-	CursorMode cursorMode;
-	private EndGameStatus winStatus = null;
-
 	public final int UPPER_LEFT = 0;
 	public final int UPPER_MID = 1;
 	public final int UPPER_RIGHT = 2;
@@ -37,6 +30,12 @@ class Board
 	public final int LOWER_LEFT = 6;
 	public final int LOWER_MIDDLE = 7;
 	public final int LOWER_RIGHT = 8;
+	private final WinHandler winHandler;
+	public Vector<Grid> grids = new Vector<>();
+	CustomCircle circleCursor = new CustomCircle(GameInfo.CIRCLE_CURSOR_CENTER, GameInfo.CIRCLE_CURSOR_CENTER,
+												 GameInfo.CIRCLE_CURSOR_RADIUS, GameInfo.CIRCLE_CURSOR_WIDTH);
+	CursorMode cursorMode;
+	private EndGameStatus winStatus = null;
 
 	public
 	Board (AnchorPane boardGrid, CursorMode _cursorMode)
@@ -49,24 +48,24 @@ class Board
 			{
 				Grid grid = new Grid(BoardColumn, BoardRow, this, boardGrid);
 				grids.add(grid);
-                if( boardGrid != null )
-                {
-                    boardGrid.getChildren().add(grid);
-                }
+				if( boardGrid != null )
+				{
+					boardGrid.getChildren().add(grid);
+				}
 
 				GameInfo.setCurrentPlayer(PlayerType.Circle);
 				SnapshotParameters snapShotparams = new SnapshotParameters();
 				snapShotparams.setFill(Color.TRANSPARENT);
 
 				WritableImage image = null;
-                if( cursorMode == CursorMode.SHAPE_CURSOR )
-                {
-                    image = circleCursor.snapshot(snapShotparams, null);
-                }
-                if( boardGrid != null )
-                {
-                    boardGrid.setCursor(new ImageCursor(image, GameInfo.placedSize, GameInfo.placedSize));
-                }
+				if( cursorMode == CursorMode.SHAPE_CURSOR )
+				{
+					image = circleCursor.snapshot(snapShotparams, null);
+				}
+				if( boardGrid != null )
+				{
+					boardGrid.setCursor(new ImageCursor(image, GameInfo.placedSize, GameInfo.placedSize));
+				}
 			}
 		}
 		GameInfo.gameBoard = this;
@@ -74,20 +73,20 @@ class Board
 
 	void paintSquares ()
 	{
-        if( GameInfo.getCurrentSector() == GameInfo.SECTOR_UNRESTRICTED )
-        {
-            for (Grid grid : grids)
-            {
-                if( !grid.isWinner() && !grid.isFull())
-                {
-                    grid.paintSquares();
-                }
-            }
-        }
-        else
-        {
-            grids.get(GameInfo.getCurrentSector()).paintSquares();
-        }
+		if( GameInfo.getCurrentSector() == GameInfo.SECTOR_UNRESTRICTED )
+		{
+			for (Grid grid : grids)
+			{
+				if( !grid.isWinner() && !grid.isFull() )
+				{
+					grid.paintSquares();
+				}
+			}
+		}
+		else
+		{
+			grids.get(GameInfo.getCurrentSector()).paintSquares();
+		}
 
 	}
 
@@ -108,16 +107,21 @@ class Board
 	public
 	void checkWinStatus ()
 	{
-        for (int i = 0; i < ROW_LENGTH; i++)
-        {
-            this.checkColumn(i);
-        }
-        for (int i = 0; i < COLUMN_LENGTH; i++)
-        {
-            this.checkRow(i);
-        }
-		this.checkLeftUpDiagonal();
-		this.checkRightUpDiagonal();
+		for (int i = 0; i < ROW_LENGTH; i++)
+		{
+			this.checkColumn(i, PlayerType.Circle, EndGameStatus.CIRCLE_WIN);
+			this.checkColumn(i, PlayerType.Cross, EndGameStatus.CROSS_WIN);
+		}
+		for (int i = 0; i < COLUMN_LENGTH; i++)
+		{
+			this.checkRow(i, PlayerType.Circle, EndGameStatus.CIRCLE_WIN);
+			this.checkRow(i, PlayerType.Cross, EndGameStatus.CROSS_WIN);
+		}
+
+		this.checkLeftUpDiagonal(PlayerType.Circle, EndGameStatus.CIRCLE_WIN);
+		this.checkLeftUpDiagonal(PlayerType.Cross, EndGameStatus.CROSS_WIN);
+		this.checkRightUpDiagonal(PlayerType.Cross, EndGameStatus.CROSS_WIN);
+		this.checkRightUpDiagonal(PlayerType.Circle, EndGameStatus.CIRCLE_WIN);
 
 		this.checkTie();
 
@@ -134,92 +138,78 @@ class Board
 		}
 	}
 
-	void checkRow (int row)
+	void checkRow (int row, PlayerType type, EndGameStatus status)
 	{
-        if( winStatus != null )
-        {
-            return;
-        }
-
-		if( (grids.get(row * ROW_LENGTH).checkCross()
-			 && grids.get(row * ROW_LENGTH + 1).checkCross()
-			 && grids.get(row * ROW_LENGTH + 2).checkCross()) )
+		if( winStatus != null )
 		{
-			this.winStatus = EndGameStatus.CROSS_WIN;
+			return;
 		}
-		else if( (grids.get(row * ROW_LENGTH).checkCircle()
-				  && grids.get(row * ROW_LENGTH + 1).checkCircle()
-				  && grids.get(row * ROW_LENGTH + 2).checkCircle()) )
+
+		if( (grids.get(row * ROW_LENGTH).checkPlayerType(type)
+			 && grids.get(row * ROW_LENGTH + 1).checkPlayerType(type)
+			 && grids.get(row * ROW_LENGTH + 2).checkPlayerType(type)) )
 		{
-			this.winStatus = EndGameStatus.CIRCLE_WIN;
+			this.winStatus = status;
 		}
 
 	}
 
-	void checkColumn (int col)
+	void checkColumn (int col, PlayerType type, EndGameStatus status)
 	{
-        if( winStatus != null )
-        {
-            return;
-        }
-
-		if( (grids.get(col).checkCross() && grids.get(col + ROW_LENGTH).checkCross()
-			 && grids.get(col + ROW_LENGTH * 2).checkCross()) )
+		if( winStatus != null )
 		{
-			this.winStatus = EndGameStatus.CROSS_WIN;
+			return;
 		}
-		else if( (grids.get(col).checkCircle() && grids.get(col + ROW_LENGTH).checkCircle()
-				  && grids.get(col + ROW_LENGTH * 2).checkCircle()) )
+
+		if( (grids.get(col).checkPlayerType(type) && grids.get(col + ROW_LENGTH).checkPlayerType(type)
+			 && grids.get(col + ROW_LENGTH * 2).checkPlayerType(type)) )
 		{
-			this.winStatus = EndGameStatus.CIRCLE_WIN;
+			this.winStatus = status;
 		}
 	}
 
-	void checkLeftUpDiagonal ()
+	void checkLeftUpDiagonal (PlayerType type, EndGameStatus status)
 	{
-        if( winStatus != null )
-        {
-            return;
-        }
-
-		if( (grids.get(UPPER_LEFT).checkCross() && grids.get(MIDDLE_MIDDLE).checkCross() && grids.get(LOWER_RIGHT).checkCross()) )
+		if( winStatus != null )
 		{
-			this.winStatus = EndGameStatus.CROSS_WIN;
+			return;
 		}
-		else if( (grids.get(UPPER_LEFT).checkCircle() && grids.get(MIDDLE_MIDDLE).checkCircle() && grids.get(LOWER_RIGHT).checkCircle()) )
+
+		if( (grids.get(UPPER_LEFT).checkPlayerType(type) && grids.get(MIDDLE_MIDDLE).checkPlayerType(type)
+			 && grids.get(LOWER_RIGHT).checkPlayerType(type)) )
 		{
-			this.winStatus = EndGameStatus.CIRCLE_WIN;
+			this.winStatus = status;
 		}
 	}
 
-	void checkRightUpDiagonal ()
+	void checkRightUpDiagonal (PlayerType type, EndGameStatus status)
 	{
-        if( winStatus != null )
-        {
-            return;
-        }
+		if( winStatus != null )
+		{
+			return;
+		}
 
-		if( (grids.get(UPPER_RIGHT).checkCross() && grids.get(MIDDLE_MIDDLE).checkCross() && grids.get(LOWER_LEFT).checkCross()) )
+		if( (grids.get(UPPER_RIGHT).checkPlayerType(type) && grids.get(MIDDLE_MIDDLE).checkPlayerType(type)
+			 && grids.get(LOWER_LEFT).checkPlayerType(type)) )
 		{
-			this.winStatus = EndGameStatus.CROSS_WIN;
+			this.winStatus = status;
 		}
-		else if( (grids.get(UPPER_RIGHT).checkCircle() && grids.get(MIDDLE_MIDDLE).checkCircle() && grids.get(LOWER_LEFT).checkCircle()) )
-		{
-			this.winStatus = EndGameStatus.CIRCLE_WIN;
-		}
+
 	}
 
 	void checkTie ()
 	{
-        if( winStatus != null )
-        {
-            return;
-        }
+		if( winStatus != null )
+		{
+			return;
+		}
 
 		for (int i = 0; i < ROW_LENGTH * COLUMN_LENGTH; i++)
 		{
 			if( !grids.get(i).isFull() )
+			{
 				return;
+			}
 		}
 
 		winStatus = EndGameStatus.TIE;

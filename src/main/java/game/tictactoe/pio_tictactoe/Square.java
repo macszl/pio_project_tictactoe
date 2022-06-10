@@ -180,4 +180,15 @@ class Square extends StackPane
 	{
 		return cross;
 	}
+
+	boolean checkPlayerType(PlayerType type)
+	{
+		if( type == PlayerType.Circle)
+		{
+			return checkCircle();
+		}
+		else {
+			return checkCross();
+		}
+	}
 }
