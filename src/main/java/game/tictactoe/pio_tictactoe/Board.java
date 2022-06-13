@@ -138,6 +138,7 @@ class Board
 		}
 	}
 
+
 	void checkRow (int row, PlayerType type, EndGameStatus status)
 	{
 		if( winStatus != null )
@@ -150,6 +151,7 @@ class Board
 			 && grids.get(row * ROW_LENGTH + 2).checkPlayerType(type)) )
 		{
 			this.winStatus = status;
+
 		}
 
 	}

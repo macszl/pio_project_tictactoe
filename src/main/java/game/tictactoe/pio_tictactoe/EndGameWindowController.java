@@ -13,6 +13,9 @@ class EndGameWindowController implements Initializable
 	@FXML
 	Text victory_text;
 
+	@FXML
+	private Text endGameCounter;
+
 	@Override
 	public
 	void initialize (URL url, ResourceBundle resourceBundle)
@@ -33,5 +36,7 @@ class EndGameWindowController implements Initializable
 		{
 			victory_text.setText("Nikt nie zwyciężył.");
 		}
+		endGameCounter.setText("Małe kółka: "+GameInfo.getSmallCircle()+"\nDuże kółka: "+GameInfo.getBigCircle()+"\nMałe X: "+GameInfo.getSmallX()+"\nDuże X: "+GameInfo.getBigX());
+
 	}
 }

@@ -38,11 +38,12 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="270.0" prefWidth="270.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="game.tictactoe.pio_tictactoe.EndGameWindowController">
    <children>
-      <Text fx:id="header" layoutX="44.0" layoutY="105.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gratulacje!">
+      <Text fx:id="header" layoutX="44.0" layoutY="75.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gratulacje!">
          <font>
             <Font size="19.0" />
          </font>
       </Text>
-      <Text fx:id="victory_text" layoutX="44.0" layoutY="165.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Zwycięstwo" />
+      <Text fx:id="victory_text" layoutX="44.0" layoutY="135.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Zwycięstwo" />
+      <Text fx:id="endGameCounter" layoutX="44.0" layoutY="170.0" strokeType="OUTSIDE" strokeWidth="0.0" />
    </children>
 </AnchorPane>

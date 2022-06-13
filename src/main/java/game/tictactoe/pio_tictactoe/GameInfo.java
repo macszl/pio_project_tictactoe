@@ -29,6 +29,13 @@ class GameInfo
 	private static EndGameStatus status = null;
 	private static PlayerType currentPlayer;
 
+	private static int smallCircle=0;
+	private static int smallX=0;
+	private static int bigCircle=0;
+	private static int bigX=0;
+
+
+
 	public static
 	PlayerType getCurrentPlayer ()
 	{
@@ -78,5 +85,37 @@ class GameInfo
 	int getGridSize ()
 	{
 		return gridSize;
+	}
+
+	public static int getBigX() {
+		return bigX;
+	}
+
+	public static void setBigX(int bigX) {
+		GameInfo.bigX = bigX;
+	}
+
+	public static int getSmallCircle() {
+		return smallCircle;
+	}
+
+	public static void setSmallCircle(int smallCircle) {
+		GameInfo.smallCircle = smallCircle;
+	}
+
+	public static int getSmallX() {
+		return smallX;
+	}
+
+	public static void setSmallX(int smallX) {
+		GameInfo.smallX = smallX;
+	}
+
+	public static int getBigCircle() {
+		return bigCircle;
+	}
+
+	public static void setBigCircle(int bigCircle) {
+		GameInfo.bigCircle = bigCircle;
 	}
 }
