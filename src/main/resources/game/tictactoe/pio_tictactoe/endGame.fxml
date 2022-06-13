@@ -44,5 +44,6 @@
          </font>
       </Text>
       <Text fx:id="victory_text" layoutX="44.0" layoutY="165.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Zwycięstwo" />
+      <Text fx:id="endGameCounter" layoutX="44.0" layoutY="200.0" strokeType="OUTSIDE" strokeWidth="0.0" />
    </children>
 </AnchorPane>

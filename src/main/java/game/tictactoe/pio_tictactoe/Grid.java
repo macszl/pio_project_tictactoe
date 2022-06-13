@@ -126,9 +126,7 @@ class Grid extends AnchorPane
 			 && squares.get(row * ROW_LENGTH + 1).checkPlayerType(type)
 			 && squares.get(row * ROW_LENGTH + 2).checkPlayerType(type)) )
 		{
-			this.getChildren().add(obj);
-			this.winner = true;
-			this.playerType = type;
+			setGridWin(obj,  type);
 		}
 
 	}
@@ -143,9 +141,7 @@ class Grid extends AnchorPane
 		if( (squares.get(col).checkPlayerType(type) && squares.get(col + ROW_LENGTH).checkPlayerType(type)
 			 && squares.get(col + ROW_LENGTH * 2).checkPlayerType(type)) )
 		{
-			this.getChildren().add(obj);
-			this.winner = true;
-			this.playerType = type;
+			setGridWin(obj,  type);
 		}
 	}
 
@@ -160,9 +156,7 @@ class Grid extends AnchorPane
 			 squares.get(MIDDLE_MIDDLE).checkPlayerType(type) &&
 			 squares.get(LOWER_RIGHT).checkPlayerType(type)) )
 		{
-			this.getChildren().add(obj);
-			this.winner = true;
-			this.playerType = type;
+			setGridWin(obj,  type);
 		}
 	}
 
@@ -177,9 +171,7 @@ class Grid extends AnchorPane
 			 squares.get(MIDDLE_MIDDLE).checkPlayerType(type) &&
 			 squares.get(LOWER_LEFT).checkPlayerType(type)) )
 		{
-			this.getChildren().add(obj);
-			this.winner = true;
-			this.playerType = type;
+			setGridWin(obj,  type);
 		}
 	}
 
@@ -217,6 +209,23 @@ class Grid extends AnchorPane
 		else {
 			return checkCross();
 		}
+	}
+
+
+	void setGridWin(StackPane obj, PlayerType type)
+	{
+		this.getChildren().add(obj);
+		this.winner = true;
+		this.playerType = type;
+		if(type==PlayerType.Circle)
+		{
+			GameInfo.setBigCircle(GameInfo.getBigCircle()+1);
+		}
+		else
+		{
+			GameInfo.setBigX(GameInfo.getBigX()+1);
+		}
+
 	}
 
 }

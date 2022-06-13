@@ -139,11 +139,13 @@ class Square extends StackPane
 			if( GameInfo.getCurrentPlayer() == PlayerType.Circle )
 			{
 				setCircle();
+				GameInfo.setSmallCircle(GameInfo.getSmallCircle()+1);
 				GameInfo.setCurrentPlayer(PlayerType.Cross);
 			}
 			else
 			{
 				setCross();
+				GameInfo.setSmallX(GameInfo.getSmallX()+1);
 				GameInfo.setCurrentPlayer(PlayerType.Circle);
 			}
 

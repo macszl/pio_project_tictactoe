@@ -6,11 +6,12 @@
   <component name="ChangeListManager">
     <list default="true" id="64111c81-8b6d-4780-9c93-a7b63714fc0c" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/game/tictactoe/pio_tictactoe/Cross.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/game/tictactoe/pio_tictactoe/Cross.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/game/tictactoe/pio_tictactoe/CustomCircle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/game/tictactoe/pio_tictactoe/CustomCircle.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/game/tictactoe/pio_tictactoe/Board.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/game/tictactoe/pio_tictactoe/Board.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/game/tictactoe/pio_tictactoe/EndGameWindowController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/game/tictactoe/pio_tictactoe/EndGameWindowController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/game/tictactoe/pio_tictactoe/GameInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/game/tictactoe/pio_tictactoe/GameInfo.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/game/tictactoe/pio_tictactoe/Grid.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/game/tictactoe/pio_tictactoe/Grid.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/game/tictactoe/pio_tictactoe/Square.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/game/tictactoe/pio_tictactoe/Square.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/game/tictactoe/pio_tictactoe/endGame.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/game/tictactoe/pio_tictactoe/endGame.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,9 +54,22 @@
       <recent name="game.tictactoe.pio_tictactoe.Square" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.HelloApplication">
+  <component name="RunManager" selected="Application.TicTacToeApplication">
     <configuration name="HelloApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="game.tictactoe.pio_tictactoe.HelloApplication" />
+      <module name="pio_project_tictactoe" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="game.tictactoe.pio_tictactoe.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TicTacToeApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="game.tictactoe.pio_tictactoe.TicTacToeApplication" />
       <module name="pio_project_tictactoe" />
       <extension name="coverage">
         <pattern>
@@ -85,6 +99,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.TicTacToeApplication" />
         <item itemvalue="Application.HelloApplication" />
         <item itemvalue="JUnit.SquareTest.userTryingToPlaceSeveralPiecesOnOneSquareTest" />
       </list>
@@ -106,6 +121,8 @@
       <workItem from="1653390480374" duration="109000" />
       <workItem from="1653906131812" duration="2007000" />
       <workItem from="1654244977065" duration="5171000" />
+      <workItem from="1654510811960" duration="1843000" />
+      <workItem from="1655115811822" duration="2130000" />
     </task>
     <servers />
   </component>
